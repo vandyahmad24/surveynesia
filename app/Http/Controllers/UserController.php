@@ -19,6 +19,7 @@ class UserController extends Controller
         $jenis_survey = Jenis_survey::all();
     	// dd($profil);
     	if(isset($profil)){
+        return view('index', ['nama' => 'nuge', 'profesi' => 'programmer']);
     		return view('user.index',compact('profil','jenis_survey'));
     	}else{
     		return view('user.profil');
