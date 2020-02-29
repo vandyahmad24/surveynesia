@@ -56,7 +56,7 @@
         });
     </script>
     <!-- Favicon -->
-    <link rel="icon" href="{{asset('tema/assets/img/brand/favicon.png')}}" type="image/png"><!-- Font Awesome -->
+    <link rel="icon" href="{{asset('logo_survey.png')}}" type="image/png"><!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('tema/assets/libs/@fortawesome/fontawesome-free/css/all.min.css')}}">
     <!-- Quick CSS -->
     <link rel="stylesheet" href="{{asset('tema/assets/css/quick-website.css')}}" id="stylesheet">

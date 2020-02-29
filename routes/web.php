@@ -23,6 +23,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['cekuser','auth'] ], function
 	Route::get('/','UserController@index')->name('user');
 	Route::post('/','UserController@addProfil')->name('add-profil');
 	Route::get('/add-survey/{id}','UserController@addSurvey')->name('add-survey');
+	Route::get('/edit-user','UserController@editUser')->name('edit-profil-user');
+	Route::post('/put-user','UserController@putUser')->name('put-profil-user');
 	Route::post('/post-survey','UserController@postSurvey')->name('post-survey');
 	
 

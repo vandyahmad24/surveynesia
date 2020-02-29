@@ -4,7 +4,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>@yield('title')</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-	<link rel="icon" href="{{asset('backend/assets/img/favicon.ico')}}" type="image/x-icon"/>
+	<link rel="icon" href="{{asset('logo_survey.png')}}" type="image/x-icon"/>
 
 	<!-- Fonts and icons -->
 	<script src="{{asset('backend/assets/js/plugin/webfont/webfont.min.js')}}"></script>
@@ -26,7 +26,7 @@
 			<div class="logo-header" data-background-color="blue">
 				
 				<a href="index.html" class="logo">
-					<img src="{{asset('backend/assets/img/logo.svg')}}" alt="navbar brand" class="navbar-brand">
+					<img src="{{asset('logo_samping.png')}}" alt="navbar brand" class="navbar-brand" width="200px">
 				</a>
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon">
@@ -62,7 +62,12 @@
 						<li class="nav-item dropdown hidden-caret">
 							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
 								<div class="avatar-sm">
-									<img src="{{asset('backend/assets/img/mlane.jpg')}}" alt="..." class="avatar-img  rounded-circle">
+									@if($profil =='')
+									<img src="{{asset('logo_survey.png')}}" alt="..." class="avatar-img  rounded-circle">
+									@else
+									<img src="{{URL::asset('upload/foto_profil/'.$profil->foto)}}" alt="..." class="avatar-img  rounded-circle">
+									@endif
+									
 								</div>
 							</a>
 							<ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -71,7 +76,12 @@
 										<div class="user-box">
 											<div class="avatar-lg">
 											
-											<img src="{{asset('backend/assets/img/mlane.jpg')}}" alt="..." class="avatar-img  rounded-circle">
+											@if($profil =='')
+											<img src="{{asset('logo_survey.png')}}" alt="..." class="avatar-img  rounded-circle">
+											@else
+											<img src="{{URL::asset('upload/foto_profil/'.$profil->foto)}}" alt="..." class="avatar-img  rounded-circle">
+											@endif
+											
 											
 
 											</div>
@@ -80,7 +90,13 @@
 												<p class="text-muted">{{Auth::user()->email}}</p>
 											</div>
 										</div>
-
+										@if($profil !='')
+									<li><a href="{{route('edit-profil-user')}}" class="dropdown-item">
+										Edit Profil
+										</a>
+										<hr>
+										@endif
+									</li>
 									</li>
 
 									 <a class="dropdown-item" href="{{ route('logout') }}"
@@ -110,7 +126,13 @@
 				<div class="sidebar-content">
 					<div class="user">
 						<div class="avatar-sm float-left mr-2">
-						<img src="{{asset('backend/assets/img/mlane.jpg')}}" alt="..." class="avatar-img  rounded-circle">
+						
+						@if($profil =='')
+						<img src="{{asset('logo_survey.png')}}" alt="..." class="avatar-img  rounded-circle">
+						@else
+						<img src="{{URL::asset('upload/foto_profil/'.$profil->foto)}}" alt="..." class="avatar-img  rounded-circle">
+						@endif
+						
 						</div>
 						<div class="info">
 							<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
@@ -151,7 +173,7 @@
 		<footer class="footer">
 				<div class="container-fluid">
 					<div class="copyright ml-auto">
-						2020, Created <i class="fa fa-heart heart text-danger"></i> by <a href="#">Asdosku Cipta Karya</a>
+						2020, Created <i class="fa fa-heart heart text-danger"></i> by <a href="#">Asdosku Guna Bangsa</a>
 					</div>				
 				</div>
 			</footer>

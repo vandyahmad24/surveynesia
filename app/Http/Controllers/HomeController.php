@@ -12,7 +12,7 @@ class HomeController extends Controller
     }
     public function getCity(Request $req)
     {
-    		$kota =	DB::table('kabupaten')->where('province_id',$req->prov_id)->get();
+    		$kota =	DB::table('indoregion_regencies')->where('province_id',$req->prov_id)->get();
     		return response()->json($kota);
     }
     

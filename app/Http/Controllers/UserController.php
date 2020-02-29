@@ -9,6 +9,7 @@ use App\Jenis_survey;
 use App\Survey;
 use DB;
 use Carbon\Carbon;
+use View;
 class UserController extends Controller
 {
 
@@ -16,37 +17,59 @@ class UserController extends Controller
     {
     	$auth = Auth::user()->id;
     	$profil = Profil_user::where('user_id',$auth)->first();
-        $jenis_survey = Jenis_survey::all();
-    	// dd($profil);
+      $perkerjaan = DB::table('konfigurasi')->where('kategori','perkerjaan')->get();
+      $jenis_survey = Jenis_survey::all();
+      // dd($profil->foto);
     	if(isset($profil)){
-        return view('index', ['nama' => 'nuge', 'profesi' => 'programmer']);
     		return view('user.index',compact('profil','jenis_survey'));
     	}else{
-    		return view('user.profil');
+    		return view('user.profil',compact('perkerjaan'));
     	}
     	
     }
     public function addProfil(Request $request)
     {
+      $this->validate($request,[
+        'nama' => 'required|string',
+        'alamat' => 'required',
+        'no_ktp' => 'required|numeric',
+        'no_hp' => 'required|numeric',
+        'upload' => 'required|image|max:6024'
+      ]);
+      $auth_id = Auth::user()->id;
+      DB::table('users')->where('id',$auth_id)->update([
+        'name' => $request->nama
+      ]);
+
     	$profil = new Profil_user;
-    	$profil->nama = $request->nama;
     	$profil->alamat = $request->alamat;
     	$profil->no_identitas = $request->no_ktp;
     	$profil->perkerjaan = $request->perkerjaan;
     	$profil->no_hp = $request->no_hp;
-    	$profil->user_id = Auth::user()->id;
+    	$profil->user_id = $auth_id;
     	$file = $request->file('upload');
 	    $nama_file = $request->no_ktp.".".$file->getClientOriginalExtension();
-	    $tujuan_upload = 'upload';
+	    $tujuan_upload = 'upload/foto_profil';
 	    $file->move($tujuan_upload,$nama_file);
     	$profil->foto = $nama_file;
     	$profil->save();
     	return redirect('/user')->with('status', 'Profil Berhasil diperbarui');;
     }
+    public function editUser()
+    {
+      $auth = Auth::user()->id;
+      $profil = Profil_user::where('user_id',$auth)->first();
+      $perkerjaan = DB::table('konfigurasi')->where('kategori','perkerjaan')->get();
+      return view('user.edit_profil',compact('profil','perkerjaan'));
+    }
+    public function putUser(Request $request)
+    {
+      dd($request->all());
+    }
     public function addSurvey($id)
     {
         $jenis_survey = Jenis_survey::find($id);
-        $provinsi = DB::table('provinces')->get();
+        $provinsi = DB::table('indoregion_provinces')->get();
         $kategori = DB::table('konfigurasi')->where('kategori','kategori')->get();
         $waktu = DB::table('konfigurasi')->where('kategori','jangka_waktu')->orderBy('id','desc')->get();
         // dd($jangka_waktu);

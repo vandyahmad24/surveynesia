@@ -31,7 +31,7 @@
 									</div>
 								</div>
 								<div class="card-body">
-								 <form action="{{route('add-profil')}}" method="POST" enctype="multipart/form-data">
+								 <form action="{{route('put-profil-user')}}" method="POST" enctype="multipart/form-data">
         						@csrf    
 									<div class="form-group">
 										<label for="">Nama </label>
@@ -42,14 +42,14 @@
 									</div>
 									<div class="form-group">
 										<label for="">Alamat </label>
-										<textarea class="form-control" name="alamat" placeholder="Masukan Alamat" rows="5">{{ old('alamat') }}</textarea>
+										<textarea class="form-control" name="alamat" placeholder="Masukan Alamat" rows="5">{{$profil->alamat}}</textarea>
 										 @error('alamat')
 										  <small class="form-text text-muted text-danger" role-alert>{{ $message }}</small>
                                           @enderror
 									</div>
 									<div class="form-group">
 										<label for="">No KTP</label>
-										<input type="text" name="no_ktp" class="form-control" value="{{ old('no_ktp') }}" placeholder="3321550152442" >
+										<input type="text" name="no_ktp" class="form-control" value="{{ $profil->no_identitas}}" placeholder="3321550152442" >
 										<small id="no_hp" class="form-text text-muted">Masukkkan Nomer KTP / Nomer Identitas Anda</small>
 										 @error('no_ktp')
 										  <small class="form-text text-muted text-danger" role-alert>{{ $message }}</small>
@@ -59,7 +59,7 @@
 										<label for="">Perkerjaan</label>
 										<select class="form-control" name="perkerjaan">
 											@foreach($perkerjaan as $item)
-											<option value="{{$item->deskripsi}}">{{$item->deskripsi}}</option>
+											<option value="{{$item->deskripsi}}" value="{{ $item->deskripsi }}" {{ ( $item->deskripsi == $profil->perkerjaan) ? 'selected' : '' }}>{{$item->deskripsi}}</option>
 											@endforeach
 										</select>
 									</div>

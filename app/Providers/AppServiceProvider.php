@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use Auth;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -23,6 +23,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $auth = Auth::user();
+        if($auth!=null){
+           $profil= DB::table('profil_user')->where('id',$auth->id)->frist();
+            View::share('profil', $profil);
+        }
     }
 }
