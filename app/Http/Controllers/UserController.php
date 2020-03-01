@@ -53,7 +53,7 @@ class UserController extends Controller
 	    $file->move($tujuan_upload,$nama_file);
     	$profil->foto = $nama_file;
     	$profil->save();
-    	return redirect('/user')->with('status', 'Profil Berhasil diperbarui');;
+    	return redirect('/user')->with('status', 'Profil Berhasil diperbarui');
     }
     public function editUser()
     {
@@ -64,10 +64,32 @@ class UserController extends Controller
     }
     public function putUser(Request $request)
     {
-      dd($request->all());
+      // dd($request->all());
+      $auth = Auth::user()->id;
+      $nama = DB::table('users')->where('id',$auth)->update([
+        'name' => $request->nama
+      ]);
+      $profil = Profil_user::find($request->profil_id);
+      $profil->alamat = $request->alamat;
+      $profil->no_identitas = $request->no_ktp;
+      $profil->perkerjaan = $request->perkerjaan;
+      $profil->no_hp = $request->no_hp;
+      if(isset($request->upload)){
+        $file = $request->file('upload');
+        $nama_file = $request->no_ktp.".".$file->getClientOriginalExtension();
+        $tujuan_upload = 'upload/foto_profil';
+        $file->move($tujuan_upload,$nama_file);
+        $profil->foto = $nama_file;
+        $profil->save();
+        return redirect('/user')->with('status', 'Profil Berhasil diperbarui');
+      }else{
+        $profil->save();
+        return redirect('/user')->with('status', 'Profil Berhasil diperbarui');
+      }
     }
     public function addSurvey($id)
     {
+      dd($request->all());
         $jenis_survey = Jenis_survey::find($id);
         $provinsi = DB::table('indoregion_provinces')->get();
         $kategori = DB::table('konfigurasi')->where('kategori','kategori')->get();

@@ -33,6 +33,7 @@
 								<div class="card-body">
 								 <form action="{{route('put-profil-user')}}" method="POST" enctype="multipart/form-data">
         						@csrf    
+        						<input type="hidden" name="profil_id" value="{{$profil->id}}">
 									<div class="form-group">
 										<label for="">Nama </label>
 										<input type="text" name="nama" class="form-control" value="{{Auth::user()->name}}" >
@@ -49,7 +50,7 @@
 									</div>
 									<div class="form-group">
 										<label for="">No KTP</label>
-										<input type="text" name="no_ktp" class="form-control" value="{{ $profil->no_identitas}}" placeholder="3321550152442" >
+										<input type="text" name="no_ktp" class="form-control" value="{{ $profil->no_identitas}}" placeholder="3321550152442" readonly>
 										<small id="no_hp" class="form-text text-muted">Masukkkan Nomer KTP / Nomer Identitas Anda</small>
 										 @error('no_ktp')
 										  <small class="form-text text-muted text-danger" role-alert>{{ $message }}</small>
@@ -65,7 +66,7 @@
 									</div>
 									<div class="form-group">
 										<label for="">No HP</label>
-										<input type="text" name="no_hp" class="form-control" value="{{ old('no_hp') }}" placeholder="08xxxxxxxxxx" >
+										<input type="text" name="no_hp" class="form-control" value="{{ $profil->no_hp}}" placeholder="08xxxxxxxxxx" >
 										<small id="no_hp" class="form-text text-muted">Masukkkan Nomer Handphone dengan format 08</small>
 										 @error('no_hp')
 										  <small class="form-text text-muted text-danger" role-alert>{{ $message }}</small>
@@ -73,9 +74,10 @@
 									</div>
 									<div class="form-group">
 										<label for="">Upload Foto</label>
-										<input type="file" name="upload" class="form-control" >
+										<input id="upload_foto" name="upload" class="form-control" type="file" accept="image/*" onchange="loadFile(event)">
+										<img id="show_photo" src="{{URL::asset('upload/foto_profil/'.$profil->foto)}}">
+										<img id="output"/ width="500px">
 										<small id="upload" class="form-text text-muted">Upload Foto Maksimal 5 MB</small>
-
 										 @error('upload')
 										  <small class="form-text text-muted text-danger" role-alert>{{ $message }}</small>
                                           @enderror
@@ -92,5 +94,14 @@
 				</div>
 			</div>
 			
-
+		
+<script>
+	$("#upload_foto").change(function(){
+		$("#show_photo").remove();
+	});
+  var loadFile = function(event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+  };
+</script>
 		@endsection

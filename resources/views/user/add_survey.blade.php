@@ -40,7 +40,7 @@
 									</div>
 									<div class="form-group">
 										<label for="">Deskripsi Survey </label>
-										<textarea class="form-control" id="comment" name="deskripsi" rows="5">
+										<textarea class="form-control" id="deskripsi_survey" name="deskripsi" rows="5">
 									</textarea>
 									</div>
 									<hr>
@@ -70,7 +70,7 @@
 										<label>Target Data</label><br>
 										@foreach($kategori as $item)
 										<label class="form-radio-label ml-3">
-											<input class="form-radio-input" type="radio" name="kategori_survey" value="{{$item->id}}">
+											<input class="form-radio-input" type="radio" name="kategori_survey" value="{{$item->harga}}">
 											<span class="form-radio-sign">{{$item->deskripsi}}</span>
 										</label>
 										@endforeach
@@ -80,7 +80,7 @@
 										<select class="form-control" name="jangka_waktu" id="jangka_waktu">
 											<option>Pilih Jangka Waktu</option>
 											@foreach($waktu as $item)
-											<option value="{{$item->id}}">{{$item->deskripsi}}</option>
+											<option value="{{$item->harga}}">{{$item->deskripsi}}</option>
 											@endforeach
 										</select>
 										<small id="jangka_waktu_ket" class="form-text text-muted">Jangka Waktu Default Kami adalah 4 Minggu, tapi kami dapat menyediakan hasil survey lebih cepat.</small>
@@ -125,6 +125,13 @@
                    });
                 });
             });
+
+
+	  var konten = document.getElementById("deskripsi_survey");
+	    CKEDITOR.replace(konten,{
+	    language:'en-gb'
+	  });
+	  CKEDITOR.config.allowedContent = true;
 
 		</script>
 		@endsection

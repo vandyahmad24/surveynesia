@@ -10,6 +10,7 @@
 	<script src="{{asset('backend/assets/js/plugin/webfont/webfont.min.js')}}"></script>
 	<script src="https://kit.fontawesome.com/b4dca489a8.js" crossorigin="anonymous"></script>
 	<script src="{{asset('backend/assets/js/core/jqueryku.js')}}"></script>
+	<script src="{{asset('backend/assets/ckeditor/ckeditor.js')}}"></script>
 	<!-- CSS Files -->
 
 	<link rel="stylesheet" href="{{asset('backend/assets/css/bootstrap.min.css')}}">
