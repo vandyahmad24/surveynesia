@@ -115,8 +115,11 @@
                     <li class="nav-item ">
                         <a class="nav-link" href="docs/index.html">Docs</a>
                     </li>
+                      <li class="nav-item ">
+                        <a class="nav-link" href="docs/index.html">Docs</a>
+                    </li>
                 </ul>
-                 @if (Route::has('login'))
+                @if (Route::has('login'))
                 <!-- Button -->
                 @auth
                  <a class="navbar-btn btn btn-sm btn-primary d-none d-lg-inline-block ml-3" href="{{ route('logout') }}"

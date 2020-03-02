@@ -64,13 +64,13 @@
 									</div>
 									<div class="form-group">
 										<label for="">Jumlah Data</label>
-										<input type="number" name="jumlah_data" class="form-control" placeholder="99" >
+										<input type="number" id="jumlah_data" name="jumlah_data" class="form-control" placeholder="99" >
 									</div>
 									<div class="form-check">
 										<label>Target Data</label><br>
 										@foreach($kategori as $item)
 										<label class="form-radio-label ml-3">
-											<input class="form-radio-input" type="radio" name="kategori_survey" value="{{$item->harga}}">
+											<input class="form-radio-input kategori_survey" type="radio" name="kategori_survey" data-price="{{$item->harga}}" value="{{$item->id}}">
 											<span class="form-radio-sign">{{$item->deskripsi}}</span>
 										</label>
 										@endforeach
@@ -80,7 +80,7 @@
 										<select class="form-control" name="jangka_waktu" id="jangka_waktu">
 											<option>Pilih Jangka Waktu</option>
 											@foreach($waktu as $item)
-											<option value="{{$item->harga}}">{{$item->deskripsi}}</option>
+											<option value="{{$item->id}}" data-price="{{$item->harga}}">{{$item->deskripsi}}</option>
 											@endforeach
 										</select>
 										<small id="jangka_waktu_ket" class="form-text text-muted">Jangka Waktu Default Kami adalah 4 Minggu, tapi kami dapat menyediakan hasil survey lebih cepat.</small>
@@ -103,6 +103,9 @@
 			
 		<script>
 		$( document ).ready(function() {
+
+			var harga_dasar = {{$harga_dasar->harga}};
+			var total = 0;
                $("#provinsi").change(function(){
                 var prov_id = $(this).val();
                 console.log(prov_id);
@@ -124,7 +127,7 @@
                        
                    });
                 });
-            });
+           
 
 
 	  var konten = document.getElementById("deskripsi_survey");
@@ -133,5 +136,30 @@
 	  });
 	  CKEDITOR.config.allowedContent = true;
 
+	  $("#jumlah_data").keyup(function(){
+	  	 var jumlah_data = $(this).val();
+	  	 var harga_data = (jumlah_data*harga_dasar);
+	  	 total = harga_data;
+	  	 console.log(total);
+	  });
+
+	  $(".kategori_survey").on("click",function(){
+	  	var kategori_survey = $(this).attr("data-price");
+	  	var harga_survey = (kategori_survey/100*harga_dasar);
+	  	total_survey = harga_survey+total;
+	  	 console.log(total_survey);
+	  	
+	  });
+	  $("#jangka_waktu").on("change",function(){
+	  	var jangka_waktu = $('#jangka_waktu option:selected').attr('data-price');
+	  	var harga_waktu = (jangka_waktu/100*jangka_waktu);
+	  	console.log('harga_waktu '+harga_waktu);
+	  	total_semua = harga_waktu + total_survey;	
+	  	console.log(total_semua);
+	  	
+	  });
+	 
+	  	   
+}); 
 		</script>
 		@endsection

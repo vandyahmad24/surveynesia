@@ -89,15 +89,16 @@ class UserController extends Controller
     }
     public function addSurvey($id)
     {
-      dd($request->all());
+      
         $jenis_survey = Jenis_survey::find($id);
         $provinsi = DB::table('indoregion_provinces')->get();
         $kategori = DB::table('konfigurasi')->where('kategori','kategori')->get();
         $waktu = DB::table('konfigurasi')->where('kategori','jangka_waktu')->orderBy('id','desc')->get();
+        $harga_dasar = DB::table('konfigurasi')->where('kategori','primary')->first();
         // dd($jangka_waktu);
         $auth = Auth::user()->id;
         $profil = Profil_user::where('user_id',$auth)->first();
-        return view('user.add_survey',compact('profil','jenis_survey','provinsi','kategori','waktu'));
+        return view('user.add_survey',compact('profil','jenis_survey','provinsi','kategori','waktu','harga_dasar'));
     }
     public function postSurvey(Request $request)
     {
