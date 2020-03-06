@@ -50,7 +50,7 @@ class KonfigurasiSeeder extends Seeder
          DB::table('konfigurasi')->insert([
         	'deskripsi' => 'Pejabat',
         	'kategori' => 'kategori',
-        	'harga' => 200,
+        	'harga' => 250,
         	'created_at' => Carbon::now()
         ]);
           DB::table('konfigurasi')->insert([

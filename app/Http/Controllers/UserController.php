@@ -88,8 +88,7 @@ class UserController extends Controller
       }
     }
     public function addSurvey($id)
-    {
-      
+    { 
         $jenis_survey = Jenis_survey::find($id);
         $provinsi = DB::table('indoregion_provinces')->get();
         $kategori = DB::table('konfigurasi')->where('kategori','kategori')->get();
@@ -102,30 +101,58 @@ class UserController extends Controller
     }
     public function postSurvey(Request $request)
     {
-        dd($request->all());
-       $date    = Carbon::now();
-       $end_time = $date->addWeeks(4)->format('Y-m-d');
-       $provinsi = DB::table('provinces')->where('id',$request->provinsi)->first();
-       $kabupaten = DB::table('kabupaten')->where('id',$request->kota)->first();
-       $lokasi = $provinsi->name.",".$kabupaten->name;
-       $auth = Auth::user()->id;
-       $survey = new Survey;
-       $survey->nama = $request->nama;
-       $survey->jenis_id = $request->jenis_survey_id;
-       $survey->user_id = $auth;
-       $survey->surveyor_id = '0';
-       $survey->tgl_selesai = $end_time;
-       $survey->lokasi=$lokasi;
+      // dd($request->all());
+     $this->validate($request,[
+        'nama' => 'required|string',
+        'deskripsi' => 'required',
+        'jumlah_data' => 'required',
+        'kategori_survey' => 'required',
+        'jangka_waktu' => 'required',
+        'upload' => 'mimes:pdf,doc,docx,zip'
+      ]);
+     
+      $survey = new Survey;
+      if(isset($request->upload)){
         $file = $request->file('upload');
         $nama_file = $request->nama.".".$file->getClientOriginalExtension();
         $tujuan_upload = 'upload/surat_ket';
         $file->move($tujuan_upload,$nama_file);
         $survey->upload = $nama_file;
+      }
+
+      if(isset($request->provinsi) && $request->provinsi!='0'){
+         $provinsi = DB::table('indoregion_provinces')->where('id',$request->provinsi)->first();
+         $kabupaten = DB::table('indoregion_regencies')->where('id',$request->kota)->first();
+         $lokasi = $provinsi->name.",".$kabupaten->name;
+      }else{
+        $lokasi = 'wilayah bebas';
+      }
+
+       $date    = Carbon::now();
+       $end_time = $date->addWeeks(4)->format('Y-m-d');
+       $auth = Auth::user()->id;
+       $survey->nama = $request->nama;
+       $survey->jenis_id = $request->jenis_survey_id;
+       $survey->user_id = $auth;
+       
+       $survey->tgl_selesai = $end_time;
+       $survey->lokasi=$lokasi;
        $survey->deskripsi_survey = $request->deskripsi;
 
+        // harga
+       $harga_dasar = DB::table('konfigurasi')->where('kategori','primary')->first();
+       $kategori_survey = DB::table('konfigurasi')->where('id',$request->kategori_survey)->first();
+       $jangka_waktu = DB::table('konfigurasi')->where('id',$request->jangka_waktu)->first();
+       
+       $harga_survey = $harga_dasar->harga*$request->jumlah_data;
+       $harga_kategori = $kategori_survey->harga/100*$harga_survey;
+       $harga_waktu = $jangka_waktu->harga/100*$harga_survey;
+       $total = $harga_survey+$harga_kategori+$harga_waktu;
 
-       // harga
-       // $harga_dasar = DB::table('konfigurasi')->where('kategori','')
+       $survey->harga = $total;
+       $survey->save();
+
+
 
 
        

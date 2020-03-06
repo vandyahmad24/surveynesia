@@ -15,7 +15,7 @@
 
 	<link rel="stylesheet" href="{{asset('backend/assets/css/bootstrap.min.css')}}">
 	<link rel="stylesheet" href="{{asset('backend/assets/css/atlantis.min.css')}}">
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.5.6/cleave.min.js"></script>
 
 	<!-- CSS Just for demo purpose, don't include it in your project -->
 	<link rel="stylesheet" href="{{asset('backend/assets/css/demo.css')}}">
@@ -63,7 +63,7 @@
 						<li class="nav-item dropdown hidden-caret">
 							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
 								<div class="avatar-sm">
-									@if($profil =='')
+									@if(!isset($profil))
 									<img src="{{asset('logo_survey.png')}}" alt="..." class="avatar-img  rounded-circle">
 									@else
 									<img src="{{URL::asset('upload/foto_profil/'.$profil->foto)}}" alt="..." class="avatar-img  rounded-circle">
@@ -77,7 +77,7 @@
 										<div class="user-box">
 											<div class="avatar-lg">
 											
-											@if($profil =='')
+											@if(!isset($profil))
 											<img src="{{asset('logo_survey.png')}}" alt="..." class="avatar-img  rounded-circle">
 											@else
 											<img src="{{URL::asset('upload/foto_profil/'.$profil->foto)}}" alt="..." class="avatar-img  rounded-circle">
@@ -91,7 +91,7 @@
 												<p class="text-muted">{{Auth::user()->email}}</p>
 											</div>
 										</div>
-										@if($profil !='')
+										@if(isset($profil) && $profil !='')
 									<li><a href="{{route('edit-profil-user')}}" class="dropdown-item">
 										Edit Profil
 										</a>
@@ -128,7 +128,7 @@
 					<div class="user">
 						<div class="avatar-sm float-left mr-2">
 						
-						@if($profil =='')
+						@if(!isset($profil))
 						<img src="{{asset('logo_survey.png')}}" alt="..." class="avatar-img  rounded-circle">
 						@else
 						<img src="{{URL::asset('upload/foto_profil/'.$profil->foto)}}" alt="..." class="avatar-img  rounded-circle">
