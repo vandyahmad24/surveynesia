@@ -114,7 +114,8 @@ class UserController extends Controller
       $survey = new Survey;
       if(isset($request->upload)){
         $file = $request->file('upload');
-        $nama_file = $request->nama.".".$file->getClientOriginalExtension();
+        $date = strtotime("now");
+        $nama_file = $request->nama."_".$date.".".$file->getClientOriginalExtension();
         $tujuan_upload = 'upload/surat_ket';
         $file->move($tujuan_upload,$nama_file);
         $survey->upload = $nama_file;
@@ -150,12 +151,27 @@ class UserController extends Controller
        $total = $harga_survey+$harga_kategori+$harga_waktu;
 
        $survey->harga = $total;
+       $survey->waktu = $jangka_waktu->deskripsi;
+       $survey->kategori = $kategori_survey->deskripsi;
+       $survey->status = 'pending';
        $survey->save();
+       $id_survey = $survey->id;
+       return redirect('user/get-pesanan/'.$id_survey)->with('status', 'Pesanan Survey Anda Berhasil di tambahkan');
+    }
+    public function getPesanan($id_survey)
+    {
+      // dd($id_survey);
+        $survey = Survey::find($id_survey);
+        return view('user.get_pesanan',compact('survey'));
+    }
 
 
-
-
-       
+    public function listPesanan()
+    {
+     
+      $auth = Auth::user()->id;
+      $survey = Survey::where('user_id',$auth)->orderBy('id','desc')->get();
+      return view('user.list_pesanan',compact('survey'));
     }
   
 }

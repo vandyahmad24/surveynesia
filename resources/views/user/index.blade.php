@@ -36,7 +36,7 @@
 									</div>
 									<hr>
 									<div class="d-flex justify-content-center">
-										<a href="user/add-survey/{{$item->id}}" class="btn btn-primary">Buat Survey</a>
+										<a href="{{route('add-survey',$item->id)}}" class="btn btn-primary">Buat Survey</a>
 									</div>
 								
 								</div>
