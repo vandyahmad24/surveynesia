@@ -64,7 +64,14 @@
 													<h3>Biaya</h3>
 
 												</td>
-												<td><span class="h3 text-danger">Rp. {{ number_format($survey->harga, 2) }}</span></td>
+												<td><span class="h3 text-success">Rp. {{ number_format($survey->harga, 2) }}</span></td>
+											</tr>
+											<tr>
+												<td>
+													<h3>Pembayaran Awal</h3>
+													<?php $pembayaran_awal = $survey->harga/2; ?>
+												</td>
+												<td><span class="h3 text-danger">Rp. {{ number_format($pembayaran_awal, 2) }}</span></td>
 											</tr>
 											<tr>
 												<td>
@@ -122,10 +129,23 @@
 																<td>a.n DNID 081393558430<br>Virtual Account : <b>8528081393558430</b></td>
 															</tr>
 															<tr>
+																<form action="{{route('add-bukti-pembayaran')}}" method="post" enctype="multipart/form-data">
+																@csrf
+																<input type="hidden" name="survey_id" value="{{$survey->id}}">
 																<td colspan="2" class="text-center table-info">
-																	<input class="text-center" type="file" name="bukti_pembayaran">
+																	<input id="input_bukti" class="text-center" type="file" name="bukti_pembayaran">
+																	 @error('bukti_pembayaran')
+																	  <small class="form-text text-muted text-danger" role-alert>{{ $message }}</small>
+							                                          @enderror
 																</td>
 															</tr>
+															<tr>
+																<td colspan="2" class="text-center">
+																	<button id="btn_upload" class="btn mx-auto btn-primary btn-block btn-lg" type="submit">Upload Bukti</button>
+																</td>
+															</tr>
+
+															</form>
 														</tbody>
 													</table>
 												</td>
@@ -143,5 +163,20 @@
 				</div>
 			</div>
 			
+			<script type="text/javascript">
+				$( document ).ready(function() {
+					$("#btn_upload").hide();
+						$("#input_bukti").on("change",function(){
+						var upload = $(this).val();
+						if(upload!="null")
+						{
+							$("#btn_upload").show();
+						}else{
+							$("#btn_upload").hide();
+						}
+					});
+				});
+				
 
+			</script>
 		@endsection

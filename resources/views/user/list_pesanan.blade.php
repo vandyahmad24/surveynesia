@@ -76,13 +76,22 @@
 													<td>Total Biaya</td>
 													<td>Rp. {{ number_format($item->harga, 2) }}</td>
 												</tr>
+												<tr class="table-danger">
+													<?php
+													$pembayaran_awal = $item->harga/2;
+													?>
+													<td>Pembayaran Awal </td>
+													<td>Rp. {{ number_format($pembayaran_awal) }}</td>
+												</tr>
+												
+
 											</tbody>
 										</table>
 										</div>
 									</div>
 									<hr>
-									<div class="btn mx-auto btn-primary btn-block btn-sm">
-										<a href="{{route('get-pesanan',$item->id)}}" class="btn btn-primary">Detail Survey</a>
+									<div class="btn mx-auto btn-primary btn-block btn-xs">
+										<a href="{{route('get-pesanan',$item->id)}}" class="btn btn-primary">Bayar Sekarang</a>
 									</div>
 								
 								</div>

@@ -20,6 +20,11 @@
 	<!-- CSS Just for demo purpose, don't include it in your project -->
 	<link rel="stylesheet" href="{{asset('backend/assets/css/demo.css')}}">
 </head>
+
+<?php
+	$profil = Auth::user();
+?>
+
 <body>
 	<div class="wrapper">
 		<div class="main-header">
@@ -63,7 +68,7 @@
 						<li class="nav-item dropdown hidden-caret">
 							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
 								<div class="avatar-sm">
-									@if(!isset($profil))
+									@if($profil=="null")
 									<img src="{{asset('logo_survey.png')}}" alt="..." class="avatar-img  rounded-circle">
 									@else
 									<img src="{{URL::asset('upload/foto_profil/'.$profil->foto)}}" alt="..." class="avatar-img  rounded-circle">
@@ -77,7 +82,7 @@
 										<div class="user-box">
 											<div class="avatar-lg">
 											
-											@if(!isset($profil))
+											@if($profil=="null")
 											<img src="{{asset('logo_survey.png')}}" alt="..." class="avatar-img  rounded-circle">
 											@else
 											<img src="{{URL::asset('upload/foto_profil/'.$profil->foto)}}" alt="..." class="avatar-img  rounded-circle">
@@ -91,7 +96,7 @@
 												<p class="text-muted">{{Auth::user()->email}}</p>
 											</div>
 										</div>
-										@if(isset($profil) && $profil !='')
+										@if($profil!="null")
 									<li><a href="{{route('edit-profil-user')}}" class="dropdown-item">
 										Edit Profil
 										</a>
@@ -149,18 +154,23 @@
 						</div>
 					</div>
 					<ul class="nav nav-primary">
-						<li class="nav-item active">
-							<a data-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
-								<i class="fas fa-home"></i>
-								<p>Daftar Menu</p>
-								<span class="caret"></span>
+						@if(Auth::user()->level=='user')
+						<li class="nav-item">
+							<a href="{{route('user')}}">
+								<i class="fas fa-layer-group"></i>
+								<p>Beranda</p>
 							</a>
-							<div class="collapse" id="dashboard">
-								<ul class="nav nav-collapse">
-								
-								</ul>
-							</div>
 						</li>
+						<li class="nav-item">
+							<a href="{{route('list-pesanan')}}">
+								<i class="fas fa-table"></i>
+								<p>Daftar Pesanan</p>
+							</a>
+						</li>
+						@else
+
+						@endif
+
 						
 					</ul>
 				</div>

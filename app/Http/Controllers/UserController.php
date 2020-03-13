@@ -37,9 +37,7 @@ class UserController extends Controller
         'upload' => 'required|image|max:6024'
       ]);
       $auth_id = Auth::user()->id;
-      DB::table('users')->where('id',$auth_id)->update([
-        'name' => $request->nama
-      ]);
+      
 
     	$profil = new Profil_user;
     	$profil->alamat = $request->alamat;
@@ -47,11 +45,17 @@ class UserController extends Controller
     	$profil->perkerjaan = $request->perkerjaan;
     	$profil->no_hp = $request->no_hp;
     	$profil->user_id = $auth_id;
+
     	$file = $request->file('upload');
 	    $nama_file = $request->no_ktp.".".$file->getClientOriginalExtension();
 	    $tujuan_upload = 'upload/foto_profil';
 	    $file->move($tujuan_upload,$nama_file);
-    	$profil->foto = $nama_file;
+
+      DB::table('users')->where('id',$auth_id)->update([
+        'name' => $request->nama,
+        'foto' => $nama_file
+      ]);
+
     	$profil->save();
     	return redirect('/user')->with('status', 'Profil Berhasil diperbarui');
     }
@@ -79,7 +83,9 @@ class UserController extends Controller
         $nama_file = $request->no_ktp.".".$file->getClientOriginalExtension();
         $tujuan_upload = 'upload/foto_profil';
         $file->move($tujuan_upload,$nama_file);
-        $profil->foto = $nama_file;
+        $nama = DB::table('users')->where('id',$auth)->update([
+        'foto' => $nama_file
+        ]);
         $profil->save();
         return redirect('/user')->with('status', 'Profil Berhasil diperbarui');
       }else{
@@ -172,6 +178,24 @@ class UserController extends Controller
       $auth = Auth::user()->id;
       $survey = Survey::where('user_id',$auth)->orderBy('id','desc')->get();
       return view('user.list_pesanan',compact('survey'));
+    }
+    public function uploadPembayaran(Request $request)
+    {
+        $this->validate($request,[
+        'bukti_pembayaran' => 'required|image|max:2024'
+        ]); 
+        $survey = Survey::find($request->survey_id);
+
+        $file = $request->file('bukti_pembayaran');
+        $date = strtotime("now");
+        $nama_file = $survey->nama."_".$date.".".$file->getClientOriginalExtension();
+        $tujuan_upload = 'upload/bukti_pembayaran';
+        $file->move($tujuan_upload,$nama_file);
+        $survey->bukti_pembayaran = $nama_file;
+        $survey->save();
+        return redirect('user/list-pesanan/')->with('status', 'Upload Bukti Pembayaran Berhasil');
+
+
     }
   
 }

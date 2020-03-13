@@ -71,5 +71,11 @@ class KonfigurasiSeeder extends Seeder
         	'harga' => 75,
         	'created_at' => Carbon::now()
         ]);
+           DB::table('konfigurasi')->insert([
+            'deskripsi' => 'Pelajar/Mahasiswa',
+            'kategori' => 'kategori',
+            'harga' => 0,
+            'created_at' => Carbon::now()
+        ]);
     }
 }

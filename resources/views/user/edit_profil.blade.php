@@ -75,7 +75,7 @@
 									<div class="form-group">
 										<label for="">Upload Foto</label>
 										<input id="upload_foto" name="upload" class="form-control" type="file" accept="image/*" onchange="loadFile(event)">
-										<img id="show_photo" src="{{URL::asset('upload/foto_profil/'.$profil->foto)}}">
+										<img id="show_photo" src="{{URL::asset('upload/foto_profil/'.Auth::user()->foto)}}">
 										<img id="output"/ width="500px">
 										<small id="upload" class="form-text text-muted">Upload Foto Maksimal 5 MB</small>
 										 @error('upload')

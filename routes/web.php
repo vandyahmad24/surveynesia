@@ -28,6 +28,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['cekuser','auth'] ], function
 	Route::post('/post-survey','UserController@postSurvey')->name('post-survey');
 	Route::get('/get-pesanan/{id_survey}','UserController@getPesanan')->name('get-pesanan');
 	Route::get('/list-pesanan','UserController@listPesanan')->name('list-pesanan');
+	Route::post('/upload-pembayaran','UserController@uploadPembayaran')->name('add-bukti-pembayaran');
+	
 	
 
 });
@@ -43,3 +45,4 @@ Route::group(['prefix' => 'mitra', 'middleware' => ['cekmitra','auth'] ], functi
 });
 
 Route::post('/get-kabupaten/','HomeController@getCity')->name('get-kabupaten');
+Route::get('/send-mail','AdminController@sendMail')->name('send-mail');

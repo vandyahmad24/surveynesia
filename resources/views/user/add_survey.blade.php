@@ -184,7 +184,7 @@
 	  $("#jumlah_data").keyup(function(){
 	  	 var jumlah_data = $(this).val();
 	  	 var harga_data = (jumlah_data*harga_dasar);
-	  	 $("#harga").text(toCommas(harga_data)+" Pilih Kategori dan Jangka Waktu");
+	  	 $("#harga").text(toCommas(harga_data)+" Pilih Target Data dan Jangka Waktu");
 	  	 $(".kategori_survey").prop('checked', false);
 	  	 $("#jangka_waktu").val("0");
 	  	 total = harga_data;
