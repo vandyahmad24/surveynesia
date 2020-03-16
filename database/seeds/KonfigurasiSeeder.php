@@ -18,12 +18,6 @@ class KonfigurasiSeeder extends Seeder
         	'created_at' => Carbon::now()
         ]);
         DB::table('konfigurasi')->insert([
-        	'deskripsi' => '1 minggu',
-        	'kategori' => 'jangka_waktu',
-        	'harga' => 100,
-        	'created_at' => Carbon::now()
-        ]);
-        DB::table('konfigurasi')->insert([
         	'deskripsi' => '2 minggu',
         	'kategori' => 'jangka_waktu',
         	'harga' => 50,

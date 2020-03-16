@@ -18,7 +18,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('index');
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['prefix' => 'user', 'middleware' => ['cekuser','auth'] ], function()
+Route::group(['prefix' => 'user', 'middleware' => ['cekuser','auth','activeuser'] ], function()
 {  
 	Route::get('/','UserController@index')->name('user');
 	Route::post('/','UserController@addProfil')->name('add-profil');
@@ -27,6 +27,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['cekuser','auth'] ], function
 	Route::post('/put-user','UserController@putUser')->name('put-profil-user');
 	Route::post('/post-survey','UserController@postSurvey')->name('post-survey');
 	Route::get('/get-pesanan/{id_survey}','UserController@getPesanan')->name('get-pesanan');
+	Route::get('/delete-pesanan/{id_survey}','UserController@deletePesanan')->name('delete-pesanan');
 	Route::get('/list-pesanan','UserController@listPesanan')->name('list-pesanan');
 	Route::post('/upload-pembayaran','UserController@uploadPembayaran')->name('add-bukti-pembayaran');
 	
@@ -45,4 +46,7 @@ Route::group(['prefix' => 'mitra', 'middleware' => ['cekmitra','auth'] ], functi
 });
 
 Route::post('/get-kabupaten/','HomeController@getCity')->name('get-kabupaten');
-Route::get('/send-mail','AdminController@sendMail')->name('send-mail');
+Route::get('/get-otp','HomeController@getOtp')->name('get-otp')->middleware('auth');
+Route::get('/resend-email','HomeController@resendEmail')->name('resend-email')->middleware('auth');
+Route::post('/verifikasi-otp','HomeController@verifikasiOtp')->name('verifikasi-otp')->middleware('auth');
+

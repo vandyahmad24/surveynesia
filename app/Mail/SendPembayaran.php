@@ -7,19 +7,19 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Auth;
-class SendEmail extends Mailable
+class SendPembayaran extends Mailable
 {
     use Queueable, SerializesModels;
-    public $user;
+    public $survey;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($survey)
     {
-        $this->user = $user;
+        $this->survey = $survey;
     }
 
 
@@ -32,8 +32,8 @@ class SendEmail extends Mailable
     {
         // return $this->view('view.name');
           return $this->from('admin@surveynesia.id')
-                   ->subject('Aktifasi Surveynesia')
-                   ->view('mail.sendmail');
+                   ->subject('Konfirmasi Pembayaran')
+                   ->view('mail.pembayaran');
                    
                   
     }

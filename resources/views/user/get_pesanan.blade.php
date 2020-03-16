@@ -86,12 +86,27 @@
 													@endif
 												</td>
 											</tr>
+											@if($survey->bukti_pembayaran !=null)
+											<tr>
+												<td>
+													<h3>Bukti Pembayaran</h3>
+												</td>
+												<td> 
+													<a href="
+													{{URL::asset('upload/bukti_pembayaran/'.$survey->bukti_pembayaran)}}
+													" download>{{$survey->bukti_pembayaran}}</a>
+												</td>
+											</tr>
+											@endif
 											<tr>
 												<td>
 													<h3>Status</h3>
 												</td>
-												<td> @if($survey->status=='pending')
+												<td>
+												 @if($survey->status=='pending' && $survey->bukti_pembayaran==null)
 													<span class="badge badge-warning">Menunggu Pembayaran</span>
+													@elseif($survey->status=='pending' && $survey->bukti_pembayaran !=null)
+													<span class="badge badge-info">Menunggu Konfirmasi Pembayaran</span>
 													@else
 													<span class="badge badge-success"> Pembayaran di Terima</span>
 													@endif

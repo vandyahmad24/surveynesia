@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-
+use Auth;
 class ActiveUser
 {
     /**
@@ -15,6 +15,9 @@ class ActiveUser
      */
     public function handle($request, Closure $next)
     {
+         if (Auth::user()->is_active == 'null') {
+            return redirect('/get-otp');
+        }
         return $next($request);
     }
 }

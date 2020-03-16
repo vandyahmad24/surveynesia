@@ -10,6 +10,10 @@ use App\Survey;
 use DB;
 use Carbon\Carbon;
 use View;
+use Redirect;
+use App\Mail\SendEmail;
+use App\Mail\SendPembayaran;
+use Illuminate\Support\Facades\Mail;
 class UserController extends Controller
 {
 
@@ -137,10 +141,10 @@ class UserController extends Controller
 
        $date    = Carbon::now();
        $end_time = $date->addWeeks(4)->format('Y-m-d');
-       $auth = Auth::user()->id;
+       $auth = Auth::user();
        $survey->nama = $request->nama;
        $survey->jenis_id = $request->jenis_survey_id;
-       $survey->user_id = $auth;
+       $survey->user_id = $auth->id;
        
        $survey->tgl_selesai = $end_time;
        $survey->lokasi=$lokasi;
@@ -161,6 +165,12 @@ class UserController extends Controller
        $survey->kategori = $kategori_survey->deskripsi;
        $survey->status = 'pending';
        $survey->save();
+
+       
+       Mail::to($auth->email)
+          ->send(new SendPembayaran($survey));
+
+
        $id_survey = $survey->id;
        return redirect('user/get-pesanan/'.$id_survey)->with('status', 'Pesanan Survey Anda Berhasil di tambahkan');
     }
@@ -169,6 +179,12 @@ class UserController extends Controller
       // dd($id_survey);
         $survey = Survey::find($id_survey);
         return view('user.get_pesanan',compact('survey'));
+    }
+    public function deletePesanan($id_survey)
+    {
+       $survey = Survey::find($id_survey);
+       $survey->delete();
+        return Redirect::back()->with('delete', 'Pesanan Berhasil di Hapus');
     }
 
 

@@ -64,6 +64,7 @@ class Kernel extends HttpKernel
         'cekuser' => \App\Http\Middleware\CekUser::class,
         'cekmitra' => \App\Http\Middleware\CekMitra::class,
         'cekadmin' => \App\Http\Middleware\CekAdmin::class,
+        'activeuser' => \App\Http\Middleware\ActiveUser::class,
     ];
 
     /**

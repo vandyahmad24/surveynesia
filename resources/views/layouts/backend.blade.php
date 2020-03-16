@@ -68,7 +68,7 @@
 						<li class="nav-item dropdown hidden-caret">
 							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
 								<div class="avatar-sm">
-									@if($profil=="null")
+									@if($profil->foto==null)
 									<img src="{{asset('logo_survey.png')}}" alt="..." class="avatar-img  rounded-circle">
 									@else
 									<img src="{{URL::asset('upload/foto_profil/'.$profil->foto)}}" alt="..." class="avatar-img  rounded-circle">
@@ -82,7 +82,7 @@
 										<div class="user-box">
 											<div class="avatar-lg">
 											
-											@if($profil=="null")
+											@if($profil->foto==null)
 											<img src="{{asset('logo_survey.png')}}" alt="..." class="avatar-img  rounded-circle">
 											@else
 											<img src="{{URL::asset('upload/foto_profil/'.$profil->foto)}}" alt="..." class="avatar-img  rounded-circle">
@@ -96,7 +96,7 @@
 												<p class="text-muted">{{Auth::user()->email}}</p>
 											</div>
 										</div>
-										@if($profil!="null")
+										@if($profil->foto!=null)
 									<li><a href="{{route('edit-profil-user')}}" class="dropdown-item">
 										Edit Profil
 										</a>
@@ -133,7 +133,7 @@
 					<div class="user">
 						<div class="avatar-sm float-left mr-2">
 						
-						@if(!isset($profil))
+						@if($profil->foto==null)
 						<img src="{{asset('logo_survey.png')}}" alt="..." class="avatar-img  rounded-circle">
 						@else
 						<img src="{{URL::asset('upload/foto_profil/'.$profil->foto)}}" alt="..." class="avatar-img  rounded-circle">

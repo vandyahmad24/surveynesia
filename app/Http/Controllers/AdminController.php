@@ -14,11 +14,4 @@ class AdminController extends Controller
     {
     	echo 'halo admin';
     }
-    public function sendMail()
-    {
-    	
-		Mail::to("vandyahmad@malasngoding.com")->send(new SendEmail());
- 
-		return "Email telah dikirim";
-    }
 }

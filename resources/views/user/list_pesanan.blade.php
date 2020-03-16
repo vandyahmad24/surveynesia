@@ -13,9 +13,14 @@
 						</div>
 					</div>
 				</div>
-					 @if (session('status'))
+				@if (session('status'))
                     <div class="alert alert-success">
                         {{ session('status') }}
+                    </div>
+                @endif
+                @if (session('delete'))
+                    <div class="alert alert-danger">
+                        {{ session('delete') }}
                     </div>
                 @endif
 			
@@ -42,11 +47,17 @@
 													<td>Jenis Survey</td>
 													<td>{{$item->Jenis->nama_survey}}</td>
 												</tr>
-												@if($item->status=='pending')
+												@if($item->status=='pending' && $item->bukti_pembayaran ==null)
 												<tr class="table-warning">
 													<td>Status</td>
 													<td>Pending, Menunggu Pembayaran</td>
 												</tr>
+												@elseif($item->status='pending' && $item->bukti_pembayaran !== null)
+												<tr class="table-info">
+													<td>Status</td>
+													<td>Pesanan Dalam Proses, Menunggu konfirmasi Pembayaran</td>
+												</tr>
+
 												@elseif($item->status=='proses')
 												<tr class="table-success">
 													<td>Status</td>
@@ -93,7 +104,12 @@
 									<div class="btn mx-auto btn-primary btn-block btn-xs">
 										<a href="{{route('get-pesanan',$item->id)}}" class="btn btn-primary">Bayar Sekarang</a>
 									</div>
-								
+									@if($item->status=='pending' && $item->bukti_pembayaran ==null )
+									<div class="btn mx-auto btn-warning btn-block btn-xs">
+										<a href="{{route('delete-pesanan',$item->id)}}" onclick="return confirm('Anda Yakin Menghapus Pesanan?')" class="btn btn-warning">Batalkan Pesanan</a>
+									</div>
+									@endif
+
 								</div>
 							</div>
 						</div>

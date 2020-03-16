@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -56,7 +56,7 @@
         });
     </script>
     <!-- Favicon -->
-    <link rel="icon" href="{{asset('tema/assets/img/brand/favicon.ico')}}" type="image/png"><!-- Font Awesome -->
+   <link rel="icon" href="{{asset('logo_survey.png')}}" type="image/x-icon"/>->
     <link rel="stylesheet" href="{{asset('tema/assets/libs/@fortawesome/fontawesome-free/css/all.min.css')}}">
     <!-- Quick CSS -->
     <link rel="stylesheet" href="{{asset('tema/assets/css/quick-website.css')}}" id="stylesheet">
@@ -162,7 +162,7 @@
         </div>
     </nav>
     <!-- Main content -->
-  	@yield('tema');
+  	@yield('tema')
     <footer class="position-relative" id="footer-main">
         <div class="footer pt-lg-7 footer-dark bg-dark">
             <!-- SVG shape -->

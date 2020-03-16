@@ -3,10 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Auth;
-use App\Survey;
-use View;
-class CekUser
+
+class SidebarUser
 {
     /**
      * Handle an incoming request.
@@ -17,10 +15,6 @@ class CekUser
      */
     public function handle($request, Closure $next)
     {
-       if (Auth::user()->level != 'user') {
-            return redirect('/');
-        }
-     
         return $next($request);
     }
 }
