@@ -22,7 +22,7 @@ class UserController extends Controller
     	$auth = Auth::user()->id;
     	$profil = Profil_user::where('user_id',$auth)->first();
       $perkerjaan = DB::table('konfigurasi')->where('kategori','perkerjaan')->get();
-      $jenis_survey = Jenis_survey::all();
+      $jenis_survey = Jenis_survey::where('is_active',1)->get();
       // dd($profil->foto);
     	if(isset($profil)){
     		return view('user.index',compact('profil','jenis_survey'));
@@ -30,6 +30,16 @@ class UserController extends Controller
     		return view('user.profil',compact('perkerjaan'));
     	}
     	
+    }
+    public function PostJenisSurvey(Request $request)
+    {
+        Jenis_survey::create([
+            'nama_survey' => $request->nama_survey,
+            'deskripsi' => $request->deskripsi,
+            'icon' => "fas fa-question-circle",
+            'is_active' => 0,
+        ]);
+        return Redirect::back()->with('success', 'Jenis Survey Yang Anda Ajukan sudah terkirim mohon tunggu untuk ditinjau');
     }
     public function addProfil(Request $request)
     {
@@ -51,7 +61,7 @@ class UserController extends Controller
     	$profil->user_id = $auth_id;
 
     	$file = $request->file('upload');
-	    $nama_file = $request->no_ktp.".".$file->getClientOriginalExtension();
+	    $nama_file = $request->no_ktp."_".$request->nama.".".$file->getClientOriginalExtension();
 	    $tujuan_upload = 'upload/foto_profil';
 	    $file->move($tujuan_upload,$nama_file);
 
