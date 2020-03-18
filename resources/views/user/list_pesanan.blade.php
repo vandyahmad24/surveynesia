@@ -101,12 +101,16 @@
 										</div>
 									</div>
 									<hr>
+									@if($item->status=='pending' && $item->bukti_pembayaran ==null )
 									<div class="btn mx-auto btn-primary btn-block btn-xs">
 										<a href="{{route('get-pesanan',$item->id)}}" class="btn btn-primary">Bayar Sekarang</a>
 									</div>
-									@if($item->status=='pending' && $item->bukti_pembayaran ==null )
 									<div class="btn mx-auto btn-warning btn-block btn-xs">
 										<a href="{{route('delete-pesanan',$item->id)}}" onclick="return confirm('Anda Yakin Menghapus Pesanan?')" class="btn btn-warning">Batalkan Pesanan</a>
+									</div>
+									@elseif($item->status=='pending' && $item->bukti_pembayaran !=null)
+									<div class="btn mx-auto btn-success btn-block btn-xs">
+										<a href="{{route('detail-pesanan',$item->id)}}" class="btn btn-success">Lihat Status Pesanan</a>
 									</div>
 									@endif
 

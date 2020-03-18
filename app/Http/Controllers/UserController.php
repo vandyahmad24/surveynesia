@@ -8,11 +8,13 @@ use App\Profil_user;
 use App\Jenis_survey;
 use App\Survey;
 use DB;
+use App\User;
 use Carbon\Carbon;
 use View;
 use Redirect;
 use App\Mail\SendEmail;
 use App\Mail\SendPembayaran;
+use App\Mail\EmailAdmin;
 use Illuminate\Support\Facades\Mail;
 class UserController extends Controller
 {
@@ -152,6 +154,7 @@ class UserController extends Controller
        $date    = Carbon::now();
        $end_time = $date->addWeeks(4)->format('Y-m-d');
        $auth = Auth::user();
+       
        $survey->nama = $request->nama;
        $survey->jenis_id = $request->jenis_survey_id;
        $survey->user_id = $auth->id;
@@ -180,8 +183,30 @@ class UserController extends Controller
        Mail::to($auth->email)
           ->send(new SendPembayaran($survey));
 
+      $admin = User::where('level','admin')->first();
+
+         $content = [
+          'subject' => "Pesanan Survey ".$request->nama,
+          'judul' => "Halo Admin Terdapat Pesanan Survey ".$request->nama,
+          'deskripsi' => "Untuk Bagian Operasional : Ada Satu Pesanan baru oleh ".$auth->name." . mohon login ke sistem untuk acc",
+          'link' => "{{route('admin')}}"
+      ];
+      // dd($content['judul']);
+      Mail::to($admin->email)
+          ->send(new EmailAdmin($content));
+
 
        $id_survey = $survey->id;
+       DB::table('activity')->insert([
+            'user_id' => $auth->id,
+            'survey_id' => $id_survey,
+            'deskripsi' => $auth->name." mengajukan survey ".$request->nama,
+            'tipe_aktivity' => "mengajukan_survey",
+            'created_by' => $auth->id,
+            'created_at' => $date
+       ]);
+
+
        return redirect('user/get-pesanan/'.$id_survey)->with('status', 'Pesanan Survey Anda Berhasil di tambahkan');
     }
     public function getPesanan($id_survey)
@@ -194,6 +219,7 @@ class UserController extends Controller
     {
        $survey = Survey::find($id_survey);
        $survey->delete();
+       DB::table('activity')->where('survey_id',$id_survey)->delete();
         return Redirect::back()->with('delete', 'Pesanan Berhasil di Hapus');
     }
 
@@ -211,6 +237,7 @@ class UserController extends Controller
         'bukti_pembayaran' => 'required|image|max:2024'
         ]); 
         $survey = Survey::find($request->survey_id);
+        $auth = Auth::user();
 
         $file = $request->file('bukti_pembayaran');
         $date = strtotime("now");
@@ -219,9 +246,24 @@ class UserController extends Controller
         $file->move($tujuan_upload,$nama_file);
         $survey->bukti_pembayaran = $nama_file;
         $survey->save();
+
+         DB::table('activity')->insert([
+            'user_id' => $auth->id,
+            'survey_id' => $survey->id,
+            'deskripsi' => $auth->name." upload bukti pembayaran ".$survey->nama,
+            'tipe_aktivity' => "upload_pembayaran_awal", 
+            'created_by' => $auth->id,
+            'created_at' => Carbon::now()
+       ]);
+
+
         return redirect('user/list-pesanan/')->with('status', 'Upload Bukti Pembayaran Berhasil');
 
 
+    }
+    public function detailPesanan($id)
+    {
+      dd($id);
     }
   
 }

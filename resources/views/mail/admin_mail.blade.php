@@ -333,8 +333,7 @@
     </style>
   </head>
   <body class="">
-    <span class="preheader">Aktifasi user {{$user['name']}} <a href="www.surveynesia.id">Surveynesia.id</a>  .</span>
-    <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
+   <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
       <tr>
         <td>&nbsp;</td>
         <td class="container">
@@ -350,8 +349,8 @@
                     <tr>
                       <td>
                         <a href="{{route('home')}}"><img src="https://i.ibb.co/j3hP5qg/logo-Survey-samping.png" alt="logo-Survey-samping" border="0" /></a>
-                        <p>Hallo {{$user['name']}},</p>
-                        <p>Selamat datang, {{$user['name']}}, Tinggal satu langkah lagi untuk aktifasi akun anda. masukkan kode aktifasi anda</p>
+                        <p>{{$content['judul']}}</p>
+                        <p>{{$content['deskripsi']}}</p>
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                           <tbody>
                             <tr>
@@ -359,7 +358,7 @@
                                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                   <tbody>
                                     <tr>
-                                      <td> <a href="{{route('get-otp')}}" target="_blank">{{$user['otp']}}</a> </td>
+                                      <td> <a href="#" target="_blank">Buka Web</a> </td>
                                     </tr>
                                   </tbody>
                                 </table>
@@ -367,8 +366,8 @@
                             </tr>
                           </tbody>
                         </table>
-                        <p>Masukkan kode aktifasi anda ke halaman surveynesia.id .</p>
-                        <p>Terimakasih atas partisipasinya <b>{{$user['name']}}</b></p>
+                        <p>Powered By Surveynesia.id .</p>
+                       
                       </td>
                     </tr>
                   </table>

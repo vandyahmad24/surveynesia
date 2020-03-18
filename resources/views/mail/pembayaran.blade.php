@@ -351,7 +351,7 @@
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td>
-                      	<a href="https://ibb.co/QY93chr"><img src="https://i.ibb.co/j3hP5qg/logo-Survey-samping.png" alt="logo-Survey-samping" border="0" /></a>
+                      	<a href="{{route('home')}}"><img src="https://i.ibb.co/j3hP5qg/logo-Survey-samping.png" alt="logo-Survey-samping" border="0" /></a>
                       	<hr>
                       	<br>
                         <p>Terimakasih Atas Pemesanan Anda</p>

@@ -163,7 +163,7 @@
 						</li>
 						<li class="nav-item">
 							<a href="{{route('list-pesanan')}}">
-								<i class="fas fa-table"></i>
+								<i class="fas fa-shopping-cart"></i>
 								<p>Daftar Pesanan <span class="badge badge-primary"> {{$jumlah_survey}}</span></p>
 							</a>
 						</li>

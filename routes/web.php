@@ -29,6 +29,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['cekuser','auth','activeuser'
 	Route::post('/post-survey','UserController@postSurvey')->name('post-survey');
 	Route::get('/get-pesanan/{id_survey}','UserController@getPesanan')->name('get-pesanan');
 	Route::get('/delete-pesanan/{id_survey}','UserController@deletePesanan')->name('delete-pesanan');
+	Route::get('/detail-pesanan/{id}','UserController@detailPesanan')->name('detail-pesanan');
 	Route::get('/list-pesanan','UserController@listPesanan')->name('list-pesanan');
 	Route::post('/upload-pembayaran','UserController@uploadPembayaran')->name('add-bukti-pembayaran');
 	
