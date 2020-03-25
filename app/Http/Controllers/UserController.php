@@ -203,7 +203,7 @@ class UserController extends Controller
             'deskripsi' => $auth->name." mengajukan survey ".$request->nama,
             'tipe_aktivity' => "mengajukan_survey",
             'created_by' => $auth->id,
-            'created_at' => $date
+            'created_at' =>  Carbon::now()
        ]);
 
 
@@ -263,7 +263,10 @@ class UserController extends Controller
     }
     public function detailPesanan($id)
     {
-      dd($id);
+       $activity = DB::table('activity')->where('survey_id',$id)->get();
+
+       $survey = Survey::find($id);
+       return view('user.detail_pesanan',compact('activity','survey'));
     }
   
 }

@@ -12,6 +12,6 @@ class AdminController extends Controller
 {
     public function index()
     {
-    	echo 'halo admin';
+    	return view('admin.home');
     }
 }

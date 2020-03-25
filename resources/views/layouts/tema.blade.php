@@ -109,15 +109,12 @@
                             <a href="about.html" class="dropdown-item">About us</a>
                             <a href="contact.html" class="dropdown-item">Contact</a>
                             <div class="dropdown-divider"></div>
-                            <a href="login.html" class="dropdown-item">Login</a>
                         </div>
                     </li>
                     <li class="nav-item ">
                         <a class="nav-link" href="docs/index.html">Docs</a>
                     </li>
-                      <li class="nav-item ">
-                        <a class="nav-link" href="docs/index.html">Docs</a>
-                    </li>
+
                 </ul>
                 @if (Route::has('login'))
                 <!-- Button -->
@@ -156,7 +153,41 @@
                 @endif
                 <!-- Mobile button -->
                 <div class="d-lg-none text-center">
-                    <a href="https://webpixels.io/themes/quick-website-ui-kit" class="btn btn-block btn-sm btn-warning">See more details</a>
+                 @if (Route::has('login'))
+                <!-- Button -->
+                @auth
+                 <a class="btn btn-block btn-sm btn-danger" href="{{ route('logout') }}"
+                   onclick="event.preventDefault();
+                                 document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }} 
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+                @if(Auth::user()->level=='admin')
+                <a class="btn btn-block btn-sm btn-primary" href="{{route('admin')}}">
+                   Masuk Halaman Admin
+                </a>
+                @elseif(Auth::user()->level=='mitra')
+                <a class="btn btn-block btn-sm btn-primary" href="{{route('mitra')}}">
+                   Masuk Halaman Mitra
+                </a>
+                @else
+                <a class="btn btn-block btn-sm btn-primary" href="{{route('user')}}">
+                   Masuk Halaman user
+                </a>
+                @endif
+
+                @else
+                <a class="btn btn-block btn-sm btn-warning ml-2" href="{{ route('login') }}">
+                    Login
+                </a>
+                <a class="btn btn-block btn-sm btn-primary" href="{{ route('register') }}">
+                   Register
+                </a>
+                @endauth
+                @endif
                 </div>
             </div>
         </div>

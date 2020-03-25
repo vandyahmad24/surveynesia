@@ -113,56 +113,30 @@
 												</td>
 											</tr>
 										</tbody>
-									</table>
-												@if($survey->status=='pending')
-												<table class="table table-typo">
-														<tbody>
-															<tr>
-																<td>Via</td>
-																<td>Keterangan</td>
-															</tr>
-															<tr>
-																<td><img src="{{asset('payment/dana.png')}}" class="img-fluid"></td>
-																<td><b>081393558430</b> a.n <b>Khalid Abdurrahman</b></td>
-															</tr>
-															<tr>
-																<td><img src="{{asset('payment/bca.png')}}" class="img-fluid"></td>
-																<td>a.n DNID 081393558430<br>Virtual Account : <b>3901081393558430</b></td>
-															</tr>
-															<tr>
-																<td><img src="{{asset('payment/bni.png')}}" class="img-fluid"></td>
-																<td>a.n DNID 081393558430<br>Virtual Account : <b>8810081393558430</b></td>
-															</tr>
-															<tr>
-																<td><img src="{{asset('payment/mandiri.png')}}" class="img-fluid"></td>
-																<td>a.n DNID 081393558430<br>Virtual Account : <b>89508081393558430</b></td>
-															</tr>
-															<tr>
-																<td><img src="{{asset('payment/btn.png')}}" class="img-fluid"></td>
-																<td>a.n DNID 081393558430<br>Virtual Account : <b>8528081393558430</b></td>
-															</tr>
-															<tr>
-																<form action="{{route('add-bukti-pembayaran')}}" method="post" enctype="multipart/form-data">
-																@csrf
-																<input type="hidden" name="survey_id" value="{{$survey->id}}">
-																<td colspan="2" class="text-center table-info">
-																	<input id="input_bukti" class="text-center" type="file" name="bukti_pembayaran">
-																	 @error('bukti_pembayaran')
-																	  <small class="form-text text-muted text-danger" role-alert>{{ $message }}</small>
-							                                          @enderror
-																</td>
-															</tr>
-															<tr>
-																<td colspan="2" class="text-center">
-																	<button id="btn_upload" class="btn mx-auto btn-primary btn-block btn-lg" type="submit">Upload Bukti</button>
-																</td>
-															</tr>
-
-															</form>
-														</tbody>
-													</table>
-													@endif
+									</table>	
 								</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="card full-height">
+								<div class="card-header">
+									<div class="card-title">Status Survey</div>
+								</div>
+								<div class="card-body">
+									<ol class="activity-feed">
+										@foreach($activity as $aktif)
+										@if($aktif->tipe_aktivity=='upload_pembayaran_awal')
+										<li class="feed-item feed-item-success">
+										@else
+										<li class="feed-item feed-item-primary">
+										@endif
+											<time class="date" >{{ \Carbon\Carbon::parse($aktif->created_at)->format('d-M-Y')}}</time>
+											<span class="text">{{$aktif->deskripsi}}</a></span> 
+										</li>
+										@endforeach
+										
+									</ol>
 								</div>
 							</div>
 						</div>
@@ -171,20 +145,5 @@
 				</div>
 			</div>
 			
-			<script type="text/javascript">
-				$( document ).ready(function() {
-					$("#btn_upload").hide();
-						$("#input_bukti").on("change",function(){
-						var upload = $(this).val();
-						if(upload!="null")
-						{
-							$("#btn_upload").show();
-						}else{
-							$("#btn_upload").hide();
-						}
-					});
-				});
-				
-
-			</script>
+			
 		@endsection

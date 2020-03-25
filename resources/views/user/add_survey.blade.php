@@ -36,14 +36,14 @@
         						<input type="hidden" name="jenis_survey_id" value="{{$jenis_survey->id}}">
 									<div class="form-group">
 										<label for="">Nama Survey </label>
-										<input type="text" name="nama" class="form-control" placeholder="Masukan Nama Anda" >
+										<input type="text" name="nama" class="form-control" placeholder="Masukan Nama Anda" value="{{ old('nama') }}">
 										 @error('nama')
 										  <small class="form-text text-muted text-danger" role-alert>{{ $message }}</small>
                                           @enderror
 									</div>
 									<div class="form-group">
 										<label for="">Deskripsi Survey </label>
-										<textarea class="form-control" id="deskripsi_survey" name="deskripsi" rows="5">
+										<textarea class="form-control" id="deskripsi_survey" name="deskripsi" rows="5">{{ old('deskripsi') }}
 										</textarea>
 										<small id="deskripsi_survey" class="form-text text-muted">Isikan Deskripsi Mengenai Survey yang anda inginkan</small>
 										 @error('deskripsi')
@@ -77,7 +77,7 @@
 									</div>
 									<div class="form-group">
 										<label for="">Jumlah Data</label>
-										<input type="number" id="jumlah_data" name="jumlah_data" class="form-control" placeholder="99" >
+										<input type="number" id="jumlah_data" name="jumlah_data" class="form-control" placeholder="99">
 										@error('jumlah_data')
 										  <small class="form-text text-muted text-danger" role-alert>{{ $message }}</small>
                                           @enderror
@@ -97,7 +97,6 @@
 									<div class="form-group">
 										<label for="">Jangka Waktu</label>
 										<select class="form-control" name="jangka_waktu" id="jangka_waktu">
-											<option value="0">Pilih Jangka Waktu</option>
 											@foreach($waktu as $item)
 											<option value="{{$item->id}}" data-price="{{$item->harga}}">{{$item->deskripsi}}</option>
 											@endforeach
