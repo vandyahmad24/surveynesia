@@ -166,7 +166,19 @@
 								<p>Daftar Pesanan <span class="badge badge-primary"> {{$jumlah_survey}}</span></p>
 							</a>
 						</li>
-						@else
+						@elseif(Auth::user()->level=='admin')
+						<li class="nav-item">
+							<a href="{{route('admin')}}">
+								<i class="fas fa-layer-group"></i>
+								<p>Jenis Survey</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{{route('konfigurasi')}}">
+								<i class="fas fa-layer-group"></i>
+								<p>Konfigurasi</p>
+							</a>
+						</li>
 
 						@endif
 

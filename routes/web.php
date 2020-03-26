@@ -40,6 +40,14 @@ Route::group(['prefix' => 'user', 'middleware' => ['cekuser','auth','activeuser'
 Route::group(['prefix' => 'admin', 'middleware' => ['cekadmin','auth'] ], function()
 {  
 	Route::get('/','AdminController@index')->name('admin');
+	Route::get('/edit-jenis-survey/','AdminController@editJenisSurvey')->name('edit-jenis-survey');
+	Route::post('/put-jenis-survey/','AdminController@putJenisSurvey')->name('put-jenis-survey');
+	Route::get('/delete-jenis-survey/{id}','AdminController@deleteJenisSurvey')->name('delete-jenis-survey');
+	Route::post('/add-konfigurasi/','AdminController@addKonfigurasi')->name('tambah-konfigurasi');
+	Route::get('/konfigurasi/','AdminController@Konfigurasi')->name('konfigurasi');
+	Route::get('/edit-konfigurasi/','AdminController@editKonfigurasi')->name('edit-konfigurasi');
+	Route::post('/put-konfigurasi/','AdminController@putKonfigurasi')->name('put-konfigurasi');
+	Route::get('/delete-konfigurasi/{id}','AdminController@deleteKonfigurasi')->name('delete-konfigurasi');
 });
 
 Route::group(['prefix' => 'mitra', 'middleware' => ['cekmitra','auth'] ], function()
