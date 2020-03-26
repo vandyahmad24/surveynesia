@@ -136,6 +136,10 @@
                 <a class="navbar-btn btn btn-sm btn-warning  ml-3 d-none d-lg-inline-block" href="{{route('mitra')}}">
                    Masuk Halaman Mitra
                 </a>
+                @elseif(Auth::user()->level=='operasional')
+                <a class="navbar-btn btn btn-sm btn-warning  ml-3 d-none d-lg-inline-block" href="{{route('operasional')}}">
+                   Masuk Halaman Operasional
+                </a>
                 @else
                 <a class="navbar-btn btn btn-sm btn-warning  ml-3 d-none d-lg-inline-block" href="{{route('user')}}">
                    Masuk Halaman user
@@ -172,6 +176,10 @@
                 @elseif(Auth::user()->level=='mitra')
                 <a class="btn btn-block btn-sm btn-primary" href="{{route('mitra')}}">
                    Masuk Halaman Mitra
+                </a>
+                @elseif(Auth::user()->level=='operasional')
+                <a class="navbar-btn btn btn-sm btn-warning  ml-3 d-none d-lg-inline-block" href="{{route('operasional')}}">
+                   Masuk Halaman operasional
                 </a>
                 @else
                 <a class="btn btn-block btn-sm btn-primary" href="{{route('user')}}">

@@ -51,11 +51,21 @@ Route::group(['prefix' => 'admin', 'middleware' => ['cekadmin','auth'] ], functi
 	Route::post('/put-konfigurasi/','AdminController@putKonfigurasi')->name('put-konfigurasi');
 	Route::get('/delete-konfigurasi/{id}','AdminController@deleteKonfigurasi')->name('delete-konfigurasi');
 	Route::get('/daftar-user','AdminController@daftarUser')->name('daftar-user');
+	Route::get('/daftar-mitra','AdminController@daftarMitra')->name('daftar-mitra');
+	Route::post('/add-mitra','AdminController@addMitra')->name('add-mitra');
 });
 
-Route::group(['prefix' => 'mitra', 'middleware' => ['cekmitra','auth'] ], function()
+Route::group(['prefix' => 'mitra', 'middleware' => ['cekmitra','auth','activeuser'] ], function()
 {  
 	Route::get('/','MitraController@index')->name('mitra');
+	Route::post('/put-profil','MitraController@putProfil')->name('put-profil-mitra');
+	Route::get('/proses-survey','MitraController@prosesSurvey')->name('proses-survey');
+});
+Route::group(['prefix' => 'operasional', 'middleware' => ['cekoperasional','auth'] ], function()
+{  
+	Route::get('/','OperasionalController@index')->name('operasional');
+	Route::get('/detail-survey-operasional/{id}','OperasionalController@detailSurvey')->name('detail-survey-operasional');
+	Route::get('/daftar-mitra-aktif','OperasionalController@daftarMitra')->name('daftar-mitra-aktif');
 });
 
 Route::post('/get-kabupaten/','HomeController@getCity')->name('get-kabupaten');

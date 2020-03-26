@@ -13,7 +13,7 @@ class ModiftyColumnLevelUser extends Migration
      */
     public function up()
     {
-         DB::statement("ALTER TABLE users MODIFY COLUMN level ENUM('admin','mitra','user','operasioanl')");
+         DB::statement("ALTER TABLE users MODIFY COLUMN level ENUM('admin','mitra','user','operasional')");
     }
 
     /**

@@ -48,5 +48,8 @@ class LoginController extends Controller
         if ($user->level === 'admin') {
             return redirect('/admin');
         } 
+        if ($user->level === 'operasional') {
+            return redirect('/operasional');
+        } 
     }
 }

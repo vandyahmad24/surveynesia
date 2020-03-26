@@ -9,6 +9,11 @@ use App\Mail\SendEmail;
 use Illuminate\Support\Facades\Mail;
 use DB;
 use Redirect;
+use App\User;
+use Carbon\Carbon;
+use App\Models\Province;
+use App\Models\Regency;
+use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
 {
 	public function index()
@@ -90,5 +95,55 @@ class AdminController extends Controller
 	            ->first();
 	            // dd($user);
         return view('admin.user_detail',compact('user'));
+    }
+    public function daftarMitra()
+    {
+    	$mitra = DB::table('users')->where('level','mitra')->orderBy('id','desc')->paginate(15);
+    	$provinsi = DB::table('indoregion_provinces')->get();
+    	return view('admin.daftar_mitra',compact('mitra','provinsi'));
+    }
+    public function addMitra(Request $request)
+    {
+    	$this->validate($request,[
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users',
+        'instansi' => 'required|string',
+        'jumlah_anggota' => 'required|numeric',
+        'no_hp' => 'required|numeric',
+        'alamat' => 'required|string',
+        'provinsi' => 'required|string',
+        'kota' => 'required|string',
+      ]);
+    	 
+    	$user =  User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make('surveynesia123'),
+            'level' => 'mitra',
+            'is_active' => 0,
+            'otp' =>rand(1000,9999)
+        ]);
+       Mail::to($request->email)
+       ->send(new SendEmail($user));
+
+
+       $provinsi = Province::find($request->provinsi);
+       $kota = Regency::find($request->kota);
+
+
+       DB::table('profil_mitra')->insert([
+       		'alamat' => $request->alamat,
+       		'instansi' => $request->instansi,
+       		'no_hp' => $request->no_hp,
+       		'jumlah_anggota' => $request->jumlah_anggota,
+       		'provinsi' => $provinsi->name,
+       		'kabupaten' => $kota->name,
+       		'user_id' => $user->id,
+       		'created_at' => Carbon::now()
+       ]);	
+       return Redirect::back()->with('success', 'Mitra Berhasil di tambahkan');
+      
+
+
     }
 }

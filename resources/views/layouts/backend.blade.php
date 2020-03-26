@@ -191,6 +191,38 @@
 								<p>Daftar User</p>
 							</a>
 						</li>
+						<li class="nav-item">
+							<a href="{{route('daftar-mitra')}}">
+								<i class="fas fa-layer-group"></i>
+								<p>Daftar Mitra</p>
+							</a>
+						</li>
+						@elseif(Auth::user()->level=='operasional')
+						<li class="nav-item">
+							<a href="{{route('operasional')}}">
+								<i class="fas fa-layer-group"></i>
+								<p>Daftar Survey</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{{route('daftar-mitra-aktif')}}">
+								<i class="fas fa-layer-group"></i>
+								<p>Daftar Mitra</p>
+							</a>
+						</li>
+						@elseif(Auth::user()->level=='mitra')
+						<li class="nav-item">
+							<a href="{{route('mitra')}}">
+								<i class="fas fa-layer-group"></i>
+								<p>Home</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{{route('proses-survey')}}">
+								<i class="fas fa-layer-group"></i>
+								<p>Proses Survey</p>
+							</a>
+						</li>
 
 						@endif
 
