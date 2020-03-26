@@ -170,6 +170,12 @@
 						<li class="nav-item">
 							<a href="{{route('admin')}}">
 								<i class="fas fa-layer-group"></i>
+								<p>Beranda</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{{route('jenis-survey')}}">
+								<i class="fas fa-layer-group"></i>
 								<p>Jenis Survey</p>
 							</a>
 						</li>

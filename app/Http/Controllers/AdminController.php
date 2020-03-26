@@ -11,7 +11,12 @@ use DB;
 use Redirect;
 class AdminController extends Controller
 {
-    public function index()
+	public function index()
+	{
+		$activity = DB::table('activity')->orderBy('id','desc')->get();
+		return view('admin.list',compact('activity'));
+	}
+    public function jenisSurvey()
     {
     	$jenis_survey = DB::table('jenis_survey')->orderBy('id','desc')->get();
     	return view('admin.home',compact('jenis_survey'));

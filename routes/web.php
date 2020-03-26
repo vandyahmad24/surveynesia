@@ -40,6 +40,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['cekuser','auth','activeuser'
 Route::group(['prefix' => 'admin', 'middleware' => ['cekadmin','auth'] ], function()
 {  
 	Route::get('/','AdminController@index')->name('admin');
+	Route::get('/jenis-survey','AdminController@jenisSurvey')->name('jenis-survey');
 	Route::get('/edit-jenis-survey/','AdminController@editJenisSurvey')->name('edit-jenis-survey');
 	Route::post('/put-jenis-survey/','AdminController@putJenisSurvey')->name('put-jenis-survey');
 	Route::get('/delete-jenis-survey/{id}','AdminController@deleteJenisSurvey')->name('delete-jenis-survey');
