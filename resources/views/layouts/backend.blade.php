@@ -185,6 +185,12 @@
 								<p>Konfigurasi</p>
 							</a>
 						</li>
+						<li class="nav-item">
+							<a href="{{route('daftar-user')}}">
+								<i class="fas fa-layer-group"></i>
+								<p>Daftar User</p>
+							</a>
+						</li>
 
 						@endif
 

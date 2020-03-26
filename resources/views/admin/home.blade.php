@@ -31,6 +31,7 @@
 					                        {{ session('delete') }}
 					                    </div>
 					                @endif
+					                <div class="table-responsive">
 									<table class="table table-bordered table-head-bg-info table-bordered-bd-info mt-4">
 										<thead>
 											<tr>
@@ -64,6 +65,7 @@
 											
 										</tbody>
 									</table>
+									</div>
 								</div>
 								
 								

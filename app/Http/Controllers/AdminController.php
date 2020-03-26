@@ -76,4 +76,19 @@ class AdminController extends Controller
     	DB::table('konfigurasi')->where('id',$id)->delete();
     	return Redirect::back()->with('delete', 'Konfigurasi Berhasil di Hapus');
     }
+    public function daftarUser()
+    {
+    	$users = DB::table('users')->where('level','user')->orderBy('id','desc')->paginate(15);
+    	return view('admin.daftar_user',compact('users'));
+    }
+    public function showProfil($id)
+    {
+    	$user = DB::table('users as u')
+	            ->join('profil_user as pu', 'u.id', '=', 'pu.user_id')
+	            ->where('u.id','=',$id)
+	            ->select('u.*', 'pu.id as profil_id', 'pu.alamat as alamat','pu.no_identitas as no_identitas','pu.perkerjaan as perkerjaan','pu.no_hp as no_hp')
+	            ->first();
+	            // dd($user);
+        return view('admin.user_detail',compact('user'));
+    }
 }

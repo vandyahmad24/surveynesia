@@ -40,6 +40,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['cekuser','auth','activeuser'
 Route::group(['prefix' => 'admin', 'middleware' => ['cekadmin','auth'] ], function()
 {  
 	Route::get('/','AdminController@index')->name('admin');
+	Route::get('/show-profil/{id}','AdminController@showProfil')->name('show-profil');
 	Route::get('/jenis-survey','AdminController@jenisSurvey')->name('jenis-survey');
 	Route::get('/edit-jenis-survey/','AdminController@editJenisSurvey')->name('edit-jenis-survey');
 	Route::post('/put-jenis-survey/','AdminController@putJenisSurvey')->name('put-jenis-survey');
@@ -49,6 +50,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['cekadmin','auth'] ], functi
 	Route::get('/edit-konfigurasi/','AdminController@editKonfigurasi')->name('edit-konfigurasi');
 	Route::post('/put-konfigurasi/','AdminController@putKonfigurasi')->name('put-konfigurasi');
 	Route::get('/delete-konfigurasi/{id}','AdminController@deleteKonfigurasi')->name('delete-konfigurasi');
+	Route::get('/daftar-user','AdminController@daftarUser')->name('daftar-user');
 });
 
 Route::group(['prefix' => 'mitra', 'middleware' => ['cekmitra','auth'] ], function()
