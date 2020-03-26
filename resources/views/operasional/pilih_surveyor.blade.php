@@ -50,6 +50,11 @@
 													<td>Jumlah Anggota : </td>
 													<td>{{$user->jumlah_anggota}}</td>
 												</tr>
+												<tr>
+													<td colspan="2">
+														<a href="" class="btn btn-info text-center">Piliih {{$user->name}}</a>
+													</td>
+												</tr>
 											</tbody>
 										</table>
 										</div>

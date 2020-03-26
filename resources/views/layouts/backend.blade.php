@@ -207,7 +207,7 @@
 						<li class="nav-item">
 							<a href="{{route('daftar-mitra-aktif')}}">
 								<i class="fas fa-layer-group"></i>
-								<p>Daftar Mitra</p>
+								<p>Daftar Mitra Aktif</p>
 							</a>
 						</li>
 						@elseif(Auth::user()->level=='mitra')

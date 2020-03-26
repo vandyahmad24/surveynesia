@@ -76,4 +76,5 @@ class MitraController extends Controller
     	$survey = Survey::where([['surveyor_id',$id],['status','proses']])->get();
     	return view('mitra.proses_survey',compact('survey'));
     }
+  
 }

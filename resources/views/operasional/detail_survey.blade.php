@@ -112,6 +112,9 @@
 													@endif
 												</td>
 											</tr>
+											<tr>
+												<td colspan="2" class="text-center"><a href="{{route('pilih-surveyor',$survey->id)}}" onclick="return confirm('Pastikan Pembayaran sudah diterima?')" class="btn btn-primary">Konfirmasi Pembayaran</a></td>
+											</tr>
 										</tbody>
 									</table>	
 								</div>
