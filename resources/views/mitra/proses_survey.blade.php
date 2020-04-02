@@ -47,31 +47,20 @@
 													<td>Jenis Survey</td>
 													<td>{{$item->Jenis->nama_survey}}</td>
 												</tr>
-												@if($item->status=='pending' && $item->bukti_pembayaran ==null)
+												@if($item->status=='pending' && $item->bukti_pembayaran ==null && $item->surveyor_id == null)
 												<tr class="table-warning">
 													<td>Status</td>
 													<td>Pending, Menunggu Pembayaran</td>
 												</tr>
-												@elseif($item->status='pending' && $item->bukti_pembayaran !== null)
+												@elseif($item->status='pending' && $item->bukti_pembayaran !== null && $item->surveyor_id == null)
 												<tr class="table-info">
 													<td>Status</td>
 													<td>Pesanan Dalam Proses, Menunggu konfirmasi Pembayaran</td>
 												</tr>
-
-												@elseif($item->status=='proses')
+												@elseif($item->status='proses' && $item->bukti_pembayaran !== null && $item->surveyor_id != null)
 												<tr class="table-success">
 													<td>Status</td>
-													<td>Pesanan Dalam Proses</td>
-												</tr>
-												@elseif($item->status=='finish')
-												<tr class="table-info">
-													<td>Status</td>
-													<td>Pesanan Selesai</td>
-												</tr>
-												@else
-												<tr class="table-danger">
-													<td>Status</td>
-													<td>Pesanan di Tolak Karena beberapa hal</td>
+													<td>Survey dalam Proses Pengerjaan</td>
 												</tr>
 
 												@endif
@@ -83,10 +72,10 @@
 													<td>Terakhir Status Berubah</td>
 													<td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-M-Y H:s')}}</td>
 												</tr>
-												
-
 											</tbody>
 										</table>
+										<div class="btn mx-auto btn-secondary btn-block btn-xs">
+										<a href="{{route('detail-laporan-harian',$item->id)}}" class="btn btn-secondary">Lihat Detail</a>
 										</div>
 									</div>
 								</div>

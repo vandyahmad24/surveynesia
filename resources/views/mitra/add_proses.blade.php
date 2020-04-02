@@ -13,9 +13,9 @@
 						</div>
 					</div>
 				</div>
-					 @if (session('status'))
+					 @if (session('success'))
                     <div class="alert alert-success">
-                        {{ session('status') }}
+                        {{ session('success') }}
                     </div>
                 @endif
 			
@@ -61,24 +61,6 @@
 											</tr>
 											<tr>
 												<td>
-													<h3>Biaya</h3>
-
-												</td>
-												<td><span class="h3 text-success">Rp. {{ number_format($survey->harga, 2) }}</span></td>
-											</tr>
-											<tr>
-												<td>
-													<h3>Pembayaran Awal</h3>
-													<?php $pembayaran_awal = $survey->harga/2; ?>
-												</td>
-												<td><span class="h3 text-danger">Rp. {{ number_format($pembayaran_awal, 2) }}
-													@if($survey->surveyor_id!=null)
-													Lunas
-													@endif
-												</span></td>
-											</tr>
-											<tr>
-												<td>
 													<h3>Surat Keterangan</h3>
 												</td>
 												<td> @if($survey->upload!=null)
@@ -90,18 +72,6 @@
 													@endif
 												</td>
 											</tr>
-											@if($survey->bukti_pembayaran !=null)
-											<tr>
-												<td>
-													<h3>Bukti Pembayaran</h3>
-												</td>
-												<td> 
-													<a href="
-													{{URL::asset('upload/bukti_pembayaran/'.$survey->bukti_pembayaran)}}
-													" download>{{$survey->bukti_pembayaran}}</a>
-												</td>
-											</tr>
-											@endif
 											@if($survey->surveyor_id!=null)
 											<tr>
 												<td>
@@ -112,25 +82,7 @@
 												</td>
 											</tr>
 											@endif
-											<tr>
-												<td>
-													<h3>Status</h3>
-												</td>
-												<td>
-												 @if($survey->status=='pending' && $survey->bukti_pembayaran==null)
-													<span class="badge badge-warning">Menunggu Pembayaran</span>
-													@elseif($survey->status=='pending' && $survey->bukti_pembayaran !=null)
-													<span class="badge badge-info">Menunggu Konfirmasi Pembayaran</span>
-													@else
-													<span class="badge badge-success"> Pembayaran di Terima</span>
-													@endif
-												</td>
-											</tr>
-											<tr>
-												@if($survey->status=='pending' && $survey->bukti_pembayaran!=null)
-												<td colspan="2" class="text-center"><a href="{{route('pilih-surveyor',$survey->id)}}" onclick="return confirm('Pastikan Pembayaran sudah diterima?')" class="btn btn-primary">Konfirmasi Pembayaran</a></td>
-												@endif
-											</tr>
+											
 											
 										</tbody>
 									</table>	
@@ -139,6 +91,8 @@
 											@foreach($activity as $aktif)
 											@if($aktif->tipe_aktivity=='upload_pembayaran_awal')
 											<li class="feed-item feed-item-success">
+											@elseif($aktif->tipe_aktivity=='laporan_harian')
+											<li class="feed-item feed-item-warning">
 											@else
 											<li class="feed-item feed-item-primary">
 											@endif
@@ -148,7 +102,9 @@
 											@endforeach
 											
 											</ol>
-										</div>
+
+											<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#tambahlaporan">Tambah Laporan Harian</button>
+									</div>
 								</div>
 								</div>
 							</div>
@@ -156,6 +112,38 @@
 					
 					</div>
 				</div>
+			</div>
+
+			<div class="modal fade" id="tambahlaporan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLabel">Buat Laporan Harian</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        <form action="{{route('add-proses-survey')}}" method="post">
+			        	@csrf
+			        	<div class="form-group">
+					    <label for="exampleInputEmail1">Tanggal laporan</label>
+					    <input type="hidden" name="survey_id" value="{{$survey->id}}">
+					    <input type="date" class="form-control" readonly name="tanggal_sekarang" value='<?php echo date('Y-m-d');?>'>
+					   <div class="form-group">
+						    <label for="exampleFormControlTextarea1">Isi Laporan</label>
+						    <textarea class="form-control" name="deskripsi" id="exampleFormControlTextarea1" rows="5"></textarea>
+						  </div>
+					  </div>
+			       
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+			        <button type="submit" class="btn btn-primary">Tambah Laporan</button>
+			      </div>
+			       </form>
+			    </div>
+			  </div>
 			</div>
 			
 			

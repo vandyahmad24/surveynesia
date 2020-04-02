@@ -23,6 +23,11 @@
                         {{ session('delete') }}
                     </div>
                 @endif
+                @if (session('success'))
+                    <div class="alert alert-primary">
+                        {{ session('success') }}
+                    </div>
+               	@endif
 			
 				<div class="page-inner mt--5">
 					<div class="row mt--2">
@@ -47,31 +52,20 @@
 													<td>Jenis Survey</td>
 													<td>{{$item->Jenis->nama_survey}}</td>
 												</tr>
-												@if($item->status=='pending' && $item->bukti_pembayaran ==null)
+												@if($item->status=='pending' && $item->bukti_pembayaran ==null && $item->surveyor_id == null)
 												<tr class="table-warning">
 													<td>Status</td>
 													<td>Pending, Menunggu Pembayaran</td>
 												</tr>
-												@elseif($item->status='pending' && $item->bukti_pembayaran !== null)
+												@elseif($item->status='pending' && $item->bukti_pembayaran !== null && $item->surveyor_id == null)
 												<tr class="table-info">
 													<td>Status</td>
 													<td>Pesanan Dalam Proses, Menunggu konfirmasi Pembayaran</td>
 												</tr>
-
-												@elseif($item->status=='proses')
+												@elseif($item->status='proses' && $item->bukti_pembayaran !== null && $item->surveyor_id != null)
 												<tr class="table-success">
 													<td>Status</td>
-													<td>Pesanan Dalam Proses</td>
-												</tr>
-												@elseif($item->status=='finish')
-												<tr class="table-info">
-													<td>Status</td>
-													<td>Pesanan Selesai</td>
-												</tr>
-												@else
-												<tr class="table-danger">
-													<td>Status</td>
-													<td>Pesanan di Tolak Karena beberapa hal</td>
+													<td>Survey dalam Proses Pengerjaan</td>
 												</tr>
 
 												@endif
@@ -92,7 +86,11 @@
 													$pembayaran_awal = $item->harga/2;
 													?>
 													<td>Pembayaran Awal </td>
-													<td>Rp. {{ number_format($pembayaran_awal) }}</td>
+													<td>Rp. {{ number_format($pembayaran_awal) }}
+														@if($item->surveyor_id!=null)
+														Lunas
+														@endif
+													</td>
 												</tr>
 												
 

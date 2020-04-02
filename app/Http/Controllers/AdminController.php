@@ -18,7 +18,7 @@ class AdminController extends Controller
 {
 	public function index()
 	{
-		$activity = DB::table('activity')->orderBy('id','desc')->get();
+		$activity = DB::table('activity')->orderBy('id','desc')->paginate(20);
 		return view('admin.list',compact('activity'));
 	}
     public function jenisSurvey()

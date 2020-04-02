@@ -60,6 +60,8 @@ Route::group(['prefix' => 'mitra', 'middleware' => ['cekmitra','auth','activeuse
 	Route::get('/','MitraController@index')->name('mitra');
 	Route::post('/put-profil','MitraController@putProfil')->name('put-profil-mitra');
 	Route::get('/proses-survey','MitraController@prosesSurvey')->name('proses-survey');
+	Route::get('/detail-laporan-harian/{id}','MitraController@detailSurvey')->name('detail-laporan-harian');
+	Route::post('/add-laporan','MitraController@addProses')->name('add-proses-survey');
 });
 Route::group(['prefix' => 'operasional', 'middleware' => ['cekoperasional','auth'] ], function()
 {  
@@ -67,6 +69,7 @@ Route::group(['prefix' => 'operasional', 'middleware' => ['cekoperasional','auth
 	Route::get('/detail-survey-operasional/{id}','OperasionalController@detailSurvey')->name('detail-survey-operasional');
 	Route::get('/daftar-mitra-aktif','OperasionalController@daftarMitra')->name('daftar-mitra-aktif');
 	Route::get('/pilih-surveyor/{id}','OperasionalController@pilihSurveyor')->name('pilih-surveyor');
+	Route::get('/put-surveyor/{id_survey}/{id_mitra}','OperasionalController@putSurveyor')->name('put-surveyor');
 });
 
 Route::post('/get-kabupaten/','HomeController@getCity')->name('get-kabupaten');

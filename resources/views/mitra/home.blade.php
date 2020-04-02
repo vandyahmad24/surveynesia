@@ -14,10 +14,15 @@
 					</div>
 				</div>
 					 @if (session('status'))
-                    <div class="alert alert-success">
+                    <div class="alert alert-primary">
                         {{ session('status') }}
                     </div>
-                @endif
+               		 @endif
+               		  @if (session('success'))
+                    <div class="alert alert-primary">
+                        {{ session('success') }}
+                    </div>
+               		 @endif
 			
 				<div class="page-inner mt--5">
 					<div class="row mt--2">
@@ -71,6 +76,34 @@
 													<h3>Jumlah Anggota : </h3>
 												</td>
 												<td><span class="h5">{{$user->jumlah_anggota}}</span>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<h3>No Handphone : </h3>
+												</td>
+												<td><span class="h5">{{$user->no_hp}}</span>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<h3>Saldo Saat ini : </h3>
+												</td>
+												<td><span class="h5">Rp. {{ number_format($user->saldo, 2) }}</span>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<h3>Status : </h3>
+												</td>
+												<td><span class="h5"> @if($user->status=='available')
+														<span class="text-success">{{$user->status}}</span>
+														@elseif($user->status=='nonavailable')
+														<span class="text-primary">{{$user->status}}</span>
+														@else
+														<span class="text-danger">{{$user->status}}</span>
+														@endif
+												 </span>
 												</td>
 											</tr>
 											

@@ -14,4 +14,8 @@ class Survey extends Model
     public function Konfigurasi(){
         return $this->belongsTo('App\Konfigurasi');
     }
+    public function Surveyor()
+    {
+    	return $this->belongsTo('App\User');
+    }
 }

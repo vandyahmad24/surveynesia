@@ -34,8 +34,8 @@
 											</li>
 											@endforeach
 											
-										</ol>
-									</div>
+											</ol>
+										</div>
 									
 								</div>
 								

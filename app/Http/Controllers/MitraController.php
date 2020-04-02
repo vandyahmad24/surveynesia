@@ -76,5 +76,23 @@ class MitraController extends Controller
     	$survey = Survey::where([['surveyor_id',$id],['status','proses']])->get();
     	return view('mitra.proses_survey',compact('survey'));
     }
+    public function detailSurvey($id)
+    {
+        $survey = Survey::find($id);
+        $activity = DB::table('activity')->where('survey_id',$id)->get();
+        return view('mitra.add_proses',compact('survey','activity'));
+    }
+    public function addProses(Request $request)
+    {
+        DB::table('activity')->insert([
+          'user_id' => Auth::user()->id,
+          'survey_id' => $request->survey_id,
+          'deskripsi' => $request->deskripsi,
+          'tipe_aktivity' => 'laporan_harian',
+          'created_by' => Auth::user()->id,
+          'created_at' => Carbon::now(),
+        ]);
+         return Redirect::back()->with('success', 'Laporan Harian Berhasil di tambahkan');
+    }
   
 }

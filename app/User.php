@@ -39,4 +39,8 @@ class User extends Authenticatable
     public function profil_user(){
         return $this->hasOne('App\Profil_user');
     }
+    public function surveyor_mitra()
+    {
+        return $this->hasOne('App\Survey');
+    }
 }
