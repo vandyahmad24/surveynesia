@@ -80,6 +80,7 @@ class MitraController extends Controller
     {
         $survey = Survey::find($id);
         $activity = DB::table('activity')->where('survey_id',$id)->get();
+        $profil = DB::table('profil_user')->where('user_id')
         return view('mitra.add_proses',compact('survey','activity'));
     }
     public function addProses(Request $request)

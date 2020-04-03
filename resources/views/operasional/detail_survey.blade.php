@@ -134,7 +134,7 @@
 											
 										</tbody>
 									</table>	
-									<div class="card-body">
+										<div class="card-body">
 										<ol class="activity-feed">
 											@foreach($activity as $aktif)
 											@if($aktif->tipe_aktivity=='upload_pembayaran_awal')
