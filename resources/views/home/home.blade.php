@@ -23,7 +23,7 @@
                     </p>
                     <!-- Buttons -->
                     <div class="text-center text-md-left mt-5">
-                        <a href="{{route('login')}}" class="btn btn-primary btn-icon">
+                        <a href="{{route('user')}}" class="btn btn-primary btn-icon">
                             <span class="btn-inner--text">Buat Survey</span><span class="btn-inner--icon">
                                 <i data-feather="arrow-right"></i>
                             </span>

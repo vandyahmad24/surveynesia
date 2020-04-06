@@ -8,7 +8,7 @@ use App\Survey;
 use App\User;
 use Carbon\Carbon;
 use Auth;
-use App\Mail\SendEmail;
+use App\Mail\EmailAdmin;
 use Illuminate\Support\Facades\Mail;
 
 class OperasionalController extends Controller
@@ -52,7 +52,7 @@ class OperasionalController extends Controller
                         ->join('profil_mitra as pm', 'u.id', '=', 'pm.user_id')
                         ->where([['u.level','mitra'],['u.foto','!=',null]])
                         ->select('u.*', 'pm.*')
-                        ->orderBy('lokasi','asc')
+                         // ->orderBy('pm.lokasi','desc') sementara dulu
                         ->get();
             return view('operasional.pilih_surveyor',compact('users','survey'));
         }

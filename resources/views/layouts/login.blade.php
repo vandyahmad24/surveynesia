@@ -78,10 +78,10 @@
             <!-- Overlay text -->
             <div class="row position-relative zindex-110 p-5">
                 <div class="col-md-8 text-center mx-auto">
-                    <span class="badge badge-warning badge-pill">News</span>
-                    <h5 class="h5 text-white mt-3">The all new Quick is here</h5>
+                    <span class="badge badge-warning badge-pill">Surveynesia</span>
+                    <h5 class="h5 text-white mt-3">Selamat Datang di Surveynesia</h5>
                     <p class="text-white opacity-8">
-                        Everything you need to create amazing websites at scale.
+                     
                     </p>
                 </div>
             </div>
