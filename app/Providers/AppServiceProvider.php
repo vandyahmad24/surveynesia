@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
 use Auth;
 use View;
 use App\Survey;
@@ -25,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Schema::defaultStringLength(191);
          view()->composer('layouts.backend', function($view)
         {
             $survey = Survey::where('user_id',Auth::user()->id)->count();
