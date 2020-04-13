@@ -75,10 +75,10 @@
                 <div class="modal-body">
                     <!-- Text -->
                     <p class="text-sm text-white mb-3">
-                        We use cookies so that our themes work for you. By using our website, you agree to our use of cookies.
+                       Please Wait
                     </p>
                     <!-- Buttons -->
-                    <a href="pages/utility/terms.html" class="btn btn-sm btn-white" target="_blank">Learn more</a>
+                    <a href="#" class="btn btn-sm btn-white" target="_blank">Learn more</a>
                     <button type="button" class="btn btn-sm btn-primary mr-2" data-dismiss="modal">OK</button>
                 </div>
             </div>
@@ -89,7 +89,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container">
             <!-- Brand -->
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="{{route('home')}}">
                 <img alt="Image placeholder" src="{{asset('logo.png')}}" style="width: 250px; height: 50px;" id="navbar-logo">
             </a>
             <!-- Toggler -->
@@ -100,20 +100,13 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mt-4 mt-lg-0 ml-auto">
                     <li class="nav-item ">
-                        <a class="nav-link" href="index.html">Overview</a>
-                    </li>
-                    <li class="nav-item dropdown dropdown-animate" data-toggle="hover">
-                        <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
-                        <div class="dropdown-menu dropdown-menu-single">
-                            <a href="index.html" class="dropdown-item">Homepage</a>
-                            <a href="about.html" class="dropdown-item">About us</a>
-                            <a href="contact.html" class="dropdown-item">Contact</a>
-                            <div class="dropdown-divider"></div>
-                        </div>
+                        <a class="nav-link" href="#tentang">Tentang</a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="docs/index.html">Docs</a>
+                        <a class="nav-link" href="#layanan">Layanan</a>
                     </li>
+                   
+                   
 
                 </ul>
                 @if (Route::has('login'))
@@ -215,7 +208,7 @@
                 <div class="row">
                     <div class="col-lg-4 mb-5 mb-lg-0">
                         <!-- Theme's logo -->
-                        <a href="index.html">
+                        <a href="{{route('home')}}">
                             <img alt="Image placeholder" src="{{asset('logo.png')}}" style="width:250px;" id="footer-logo">
                         </a>
                         <!-- Webpixels' mission -->
@@ -223,13 +216,13 @@
                         <!-- Social -->
                     </div>
                     <div class="col-lg-2 col-6 col-sm-4 mb-5 mb-lg-0">
-                        <h6 class="heading mb-3">About</h6>
+                        {{-- <h6 class="heading mb-3">About</h6>
                         <ul class="list-unstyled">
                             <li><a href="#">Services</a></li>
                             <li><a href="#">Pricing</a></li>
                             <li><a href="#">Contact</a></li>
                             <li><a href="#">Careers</a></li>
-                        </ul>
+                        </ul> --}}
                     </div>
                    
                 </div>

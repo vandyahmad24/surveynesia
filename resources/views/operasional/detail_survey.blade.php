@@ -77,6 +77,7 @@
 													@endif
 												</span></td>
 											</tr>
+
 											<tr>
 												<td>
 													<h3>Surat Keterangan</h3>
@@ -99,6 +100,18 @@
 													<a href="
 													{{URL::asset('upload/bukti_pembayaran/'.$survey->bukti_pembayaran)}}
 													" download>{{$survey->bukti_pembayaran}}</a>
+												</td>
+											</tr>
+											@endif
+												@if($survey->bukti_pembayaran2 !=null)
+											<tr>
+												<td>
+													<h3>Bukti Pelunasan</h3>
+												</td>
+												<td> 
+													<a href="
+													{{URL::asset('upload/bukti_pembayaran/'.$survey->bukti_pembayaran2)}}
+													" download>{{$survey->bukti_pembayaran2}}</a>
 												</td>
 											</tr>
 											@endif
@@ -139,6 +152,8 @@
 											@foreach($activity as $aktif)
 											@if($aktif->tipe_aktivity=='upload_pembayaran_awal')
 											<li class="feed-item feed-item-success">
+											@elseif($aktif->tipe_aktivity=='laporan_harian')
+											<li class="feed-item feed-item-warning">
 											@else
 											<li class="feed-item feed-item-primary">
 											@endif
@@ -148,7 +163,13 @@
 											@endforeach
 											
 											</ol>
-										</div>
+											@if($survey->bukti_pembayaran2 != null)
+											<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+											 Konfirmasi Pelunasan
+											</button>
+											@endif
+
+										
 								</div>
 								</div>
 							</div>
@@ -157,6 +178,26 @@
 					</div>
 				</div>
 			</div>
-			
+				<!-- Modal -->
+			<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLongTitle">Konfirmasi Pelunasan</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        <h5>Sebelum melakukan konfirmasi pembayara, Pastikan dana sudah masuk ke rekening sesuai dengan nominal <span class="text-success">Rp. {{ number_format($pembayaran_awal, 2) }} </span> , setelah melakukan konfirmasi, pastikan surveyor <b>{{$survey->Surveyor->name}} untuk mengirimkan hasil surveynya</b></h5>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+			        <a href="#" class="btn btn-primary">Konfirmasi Pembayaran</a>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</div>
 			
 		@endsection

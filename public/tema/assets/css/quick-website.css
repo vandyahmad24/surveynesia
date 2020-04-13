@@ -92,6 +92,9 @@ body
     color: #718096;
     background-color: #fff;
 }
+html {
+  scroll-behavior: smooth;
+}
 
 [tabindex='-1']:focus:not(:focus-visible)
 {

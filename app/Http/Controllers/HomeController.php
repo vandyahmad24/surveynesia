@@ -56,5 +56,16 @@ class HomeController extends Controller
     	
 
     }
+    public function sendWA($no_hp)
+    {
+        $newNumber = preg_replace('/^0?/', '62', $no_hp);
+        return redirect()->to("https://api.whatsapp.com/send?phone=".$newNumber);
+    }
+
+    public function caraPembayaran()
+    {
+     return view('user.cara_pembayaran');
+    }
+
     
 }

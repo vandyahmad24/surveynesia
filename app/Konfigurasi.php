@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Konfigurasi extends Model
 {
-    protected $table = "Konfigurasi";
+    protected $table = "konfigurasi";
     public function SurveyKonfigurasi(){
     	return $this->hasMany('App\Survey');
     }

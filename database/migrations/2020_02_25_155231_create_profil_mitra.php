@@ -13,7 +13,7 @@ class CreateProfilMitra extends Migration
      */
     public function up()
     {
-        Schema::create('Profil_mitra', function (Blueprint $table) {
+        Schema::create('profil_mitra', function (Blueprint $table) {
             $table->bigIncrements('id');
              $table->string('nama',100);
             $table->string('alamat',255);
@@ -32,6 +32,6 @@ class CreateProfilMitra extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Profil_mitra');
+        Schema::dropIfExists('profil_mitra');
     }
 }

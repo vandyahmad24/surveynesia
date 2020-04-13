@@ -19,7 +19,7 @@
                     </h1>
                     <!-- Text -->
                     <p class="lead text-center text-md-left text-muted">
-                        Suveynesia menyediakan surveyor berpengalaman dalam mengerjakan survey anda
+                         Menyediakan berbagai surveyor profesional di berbagai kota untuk menyelesaikan survey anda
                     </p>
                     <!-- Buttons -->
                     <div class="text-center text-md-left mt-5">
@@ -35,7 +35,7 @@
             </div>
         </div>
     </section>
-    <section class="slice slice-lg pt-lg-6 pb-0 pb-lg-6">
+    <section class="slice slice-lg pt-lg-6 pb-0 pb-lg-6" id="tentang">
         <div class="container">
             <!-- Title -->
             <!-- Section title -->
@@ -45,7 +45,7 @@
 
                     <h2 class=" mt-4">Apa Itu Surveynesia?</h2>
                     <div class="mt-2">
-                        <p class="lead lh-180">Surveynesia merupakan pltform website yang membantu anda dalam melakukan pengumpulan data. Kami memiliki Surveyor berpengalaman dalam pengumpulan data</p>
+                        <p class="lead lh-180">Surveynesia merupakan platform yang membantu anda dalam melakukan survei atau pengumpulan data secara online dan offline (lapangan). Pantau pelaksanaan survey dimanapun dengan mudah</p>
                     </div>
                 </div>
             </div>
@@ -87,7 +87,7 @@
             </div>
         </div>
     </section>
-    <section class="slice slice-lg">
+    <section class="slice slice-lg" id="layanan">
         <div class="container">
             <div class="row row-grid justify-content-around align-items-center">
                 <div class="col-lg-6 order-lg-2 ml-lg-auto pl-lg-6">
@@ -103,11 +103,11 @@
                             <div class="d-flex align-items-center">
                                 <div>
                                     <div class="icon icon-shape icon-primary icon-sm rounded-circle mr-3">
-                                        <i class="fas fa-store-alt"></i>
+                                        <i class="fas fa-globe-asia"></i>
                                     </div>
                                 </div>
                                 <div>
-                                    <span class="h6 mb-0">Perfect for modern startups</span>
+                                    <span class="h6 mb-0">Surveyor Tersebar di Kota Kota di Indonesia</span>
                                 </div>
                             </div>
                         </li>
@@ -115,11 +115,11 @@
                             <div class="d-flex align-items-center">
                                 <div>
                                     <div class="icon icon-shape icon-warning icon-sm rounded-circle mr-3">
-                                        <i class="fas fa-palette"></i>
+                                       <i class="fas fa-money-bill-wave-alt"></i>
                                     </div>
                                 </div>
                                 <div>
-                                    <span class="h6 mb-0">Built with customization and ease-of-use at its core</span>
+                                    <span class="h6 mb-0">Garansi Cashback</span>
                                 </div>
                             </div>
                         </li>
@@ -127,11 +127,11 @@
                             <div class="d-flex align-items-center">
                                 <div>
                                     <div class="icon icon-shape icon-success icon-sm rounded-circle mr-3">
-                                        <i class="fas fa-cog"></i>
+                                      <i class="fas fa-clipboard"></i>  
                                     </div>
                                 </div>
                                 <div>
-                                    <span class="h6 mb-0">Quality design and thoughfully crafted code</span>
+                                    <span class="h6 mb-0">Bisa Pantau Progress Setiap Saat</span>
                                 </div>
                             </div>
                         </li>

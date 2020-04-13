@@ -81,7 +81,9 @@ class MitraController extends Controller
         $survey = Survey::find($id);
         $activity = DB::table('activity')->where('survey_id',$id)->get();
         $profil = DB::table('profil_user')->where('user_id');
-        return view('mitra.add_proses',compact('survey','activity'));
+        $user_pembuat = User::find($survey->user_id);
+        // dd($user_pembuat);
+        return view('mitra.add_proses',compact('survey','activity','user_pembuat'));
     }
     public function addProses(Request $request)
     {

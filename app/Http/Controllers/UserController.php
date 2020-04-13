@@ -241,7 +241,7 @@ class UserController extends Controller
 
         $file = $request->file('bukti_pembayaran');
         $date = strtotime("now");
-        $nama_file = $survey->nama."_".$date.".".$file->getClientOriginalExtension();
+        $nama_file = $survey->nama."_bukti_pembayaran_awal_".$date.".".$file->getClientOriginalExtension();
         $tujuan_upload = 'upload/bukti_pembayaran';
         $file->move($tujuan_upload,$nama_file);
         $survey->bukti_pembayaran = $nama_file;
@@ -261,12 +261,57 @@ class UserController extends Controller
 
 
     }
+     public function uploadPembayaran2(Request $request)
+    {
+      // dd($request->all());
+        $this->validate($request,[
+        'bukti_pembayaran2' => 'required|image|max:2024'
+        ]); 
+        $survey = Survey::find($request->survey_id);
+        $auth = Auth::user();
+
+        $file = $request->file('bukti_pembayaran2');
+        $date = strtotime("now");
+        $nama_file = $survey->nama."_bukti_pelunasan_".$date.".".$file->getClientOriginalExtension();
+        $tujuan_upload = 'upload/bukti_pembayaran';
+        $file->move($tujuan_upload,$nama_file);
+        $survey->bukti_pembayaran2 = $nama_file;
+        $survey->save();
+
+         DB::table('activity')->insert([
+            'user_id' => $auth->id,
+            'survey_id' => $survey->id,
+            'deskripsi' => $auth->name." upload bukti pembayaran pelunasan ".$survey->nama,
+            'tipe_aktivity' => "pelunasan", 
+            'created_by' => $auth->id,
+            'created_at' => Carbon::now()
+       ]);
+
+
+        return Redirect::back()->with('status', 'Bukti Pembayaran Berhasil di Upload');
+
+
+    }
     public function detailPesanan($id)
     {
        $activity = DB::table('activity')->where('survey_id',$id)->get();
-
        $survey = Survey::find($id);
-       return view('user.detail_pesanan',compact('activity','survey'));
+       $surveyor = DB::table('survey as s')
+                        ->leftJoin('profil_mitra as pm','pm.user_id','=','s.surveyor_id')
+                        ->leftJoin('users as u','s.surveyor_id','=','u.id')
+                        ->where('pm.user_id',$survey->surveyor_id)
+                        ->first();
+       // dd($surveyor);
+       return view('user.detail_pesanan',compact('activity','survey','surveyor'));
     }
+    public function detailMitra($id)
+    {
+      $user = DB::table('users as u')
+                  ->leftJoin('profil_mitra as pm','pm.user_id','u.id')
+                  ->where('u.id',$id)
+                  ->first();
+      return view('user.detail_mitra',compact('user'));
+    }
+  
   
 }

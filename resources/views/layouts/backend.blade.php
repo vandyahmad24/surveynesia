@@ -96,7 +96,7 @@
 												<p class="text-muted">{{Auth::user()->email}}</p>
 											</div>
 										</div>
-										@if($profil->foto!=null)
+										@if($profil->foto!=null && Auth::user()->level == 'user')
 									<li><a href="{{route('edit-profil-user')}}" class="dropdown-item">
 										Edit Profil
 										</a>
@@ -169,7 +169,7 @@
 						@elseif(Auth::user()->level=='admin')
 						<li class="nav-item">
 							<a href="{{route('admin')}}">
-								<i class="fas fa-layer-group"></i>
+								<i class="fas fa-home"></i>
 								<p>Beranda</p>
 							</a>
 						</li>
@@ -181,32 +181,38 @@
 						</li>
 						<li class="nav-item">
 							<a href="{{route('konfigurasi')}}">
-								<i class="fas fa-layer-group"></i>
+								<i class="fas fa-cogs"></i>
 								<p>Konfigurasi</p>
 							</a>
 						</li>
 						<li class="nav-item">
 							<a href="{{route('daftar-user')}}">
-								<i class="fas fa-layer-group"></i>
+								<i class="fas fa-users"></i>
 								<p>Daftar User</p>
 							</a>
 						</li>
 						<li class="nav-item">
 							<a href="{{route('daftar-mitra')}}">
-								<i class="fas fa-layer-group"></i>
+								<i class="fas fa-user-tie"></i>
 								<p>Daftar Mitra</p>
 							</a>
 						</li>
 						@elseif(Auth::user()->level=='operasional')
 						<li class="nav-item">
 							<a href="{{route('operasional')}}">
+								<i class="fas fa-history"></i>
+								<p>Daftar Aktivitas</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{{route('daftar-survey')}}">
 								<i class="fas fa-layer-group"></i>
 								<p>Daftar Survey</p>
 							</a>
 						</li>
 						<li class="nav-item">
 							<a href="{{route('daftar-mitra-aktif')}}">
-								<i class="fas fa-layer-group"></i>
+								<i class="fas fa-user-tie"></i>
 								<p>Daftar Mitra Aktif</p>
 							</a>
 						</li>
@@ -219,8 +225,8 @@
 						</li>
 						<li class="nav-item">
 							<a href="{{route('proses-survey')}}">
-								<i class="fas fa-layer-group"></i>
-								<p>Proses Survey</p>
+								<i class="fas fa-hourglass-start"></i>
+								<p>Proses Survey <span class="badge badge-primary"> {{$proses_survey}}</span> </p>
 							</a>
 						</li>
 

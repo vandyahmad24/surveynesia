@@ -30,7 +30,15 @@ class AppServiceProvider extends ServiceProvider
          view()->composer('layouts.backend', function($view)
         {
             $survey = Survey::where('user_id',Auth::user()->id)->count();
+            $proses_survey = Survey::where([['surveyor_id',Auth::user()->id],['status','proses']])->count();
             $view->with('jumlah_survey', $survey);
         });
+
+          view()->composer('layouts.backend', function($view)
+        {
+            $proses_survey = Survey::where([['surveyor_id',Auth::user()->id],['status','proses']])->count();
+            $view->with('proses_survey', $proses_survey);
+        });
+
     }
 }

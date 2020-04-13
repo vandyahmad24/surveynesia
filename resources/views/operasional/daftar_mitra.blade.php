@@ -50,6 +50,11 @@
 													<td>Jumlah Anggota : </td>
 													<td>{{$user->jumlah_anggota}}</td>
 												</tr>
+												<tr>
+													<td>No Hp : </td>
+													<td> <a href="{{route('send-wa',$user->no_hp)}}" target="_blank"> {{$user->no_hp}}</a></td>
+												</tr>
+
 											</tbody>
 										</table>
 										</div>

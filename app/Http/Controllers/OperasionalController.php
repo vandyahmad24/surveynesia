@@ -13,7 +13,13 @@ use Illuminate\Support\Facades\Mail;
 
 class OperasionalController extends Controller
 {
+
     public function index()
+    {
+       $activity = DB::table('activity')->orderBy('id','desc')->paginate(20);
+       return view('operasional.daftar_aktifitas',compact('activity'));
+    }
+    public function daftarsurvey()
     {
     	$survey = Survey::orderBy('id','desc')->get();
     	return view('operasional.daftar_survey',compact('survey'));

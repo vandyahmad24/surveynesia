@@ -72,16 +72,19 @@
 													@endif
 												</td>
 											</tr>
-											@if($survey->surveyor_id!=null)
 											<tr>
 												<td>
-													<h3> Nama Surveyor </h3>
+													<h3> Nama Pembuat Survey </h3>
+
 												</td>
 												<td> 
-													{{$survey->Surveyor->name}}
+													{{$user_pembuat->name}}
+													<br>
+													<a href="{{route('send-wa',$user_pembuat->profil_user->no_hp)}}" > {{$user_pembuat->profil_user->no_hp}}</a>
+
 												</td>
 											</tr>
-											@endif
+										
 											
 											
 										</tbody>

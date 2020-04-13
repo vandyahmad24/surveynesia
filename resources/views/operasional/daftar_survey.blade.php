@@ -52,20 +52,25 @@
 													<td>Jenis Survey</td>
 													<td>{{$item->Jenis->nama_survey}}</td>
 												</tr>
-												@if($item->status=='pending' && $item->bukti_pembayaran ==null && $item->surveyor_id == null)
+												@if($item->status=='pending' && $item->bukti_pembayaran ==null && $item->surveyor_id == null && $item->bukti_pembayaran2 == null)
 												<tr class="table-warning">
 													<td>Status</td>
 													<td>Pending, Menunggu Pembayaran</td>
 												</tr>
-												@elseif($item->status='pending' && $item->bukti_pembayaran !== null && $item->surveyor_id == null)
+												@elseif($item->status='pending' && $item->bukti_pembayaran !== null && $item->surveyor_id == null && $item->bukti_pembayaran2 == null)
 												<tr class="table-info">
 													<td>Status</td>
 													<td>Pesanan Dalam Proses, Menunggu konfirmasi Pembayaran</td>
 												</tr>
-												@elseif($item->status='proses' && $item->bukti_pembayaran !== null && $item->surveyor_id != null)
+												@elseif($item->status='proses' && $item->bukti_pembayaran !== null && $item->surveyor_id != null && $item->bukti_pembayaran2 == null)
 												<tr class="table-success">
 													<td>Status</td>
 													<td>Survey dalam Proses Pengerjaan</td>
+												</tr>
+												@elseif($item->status='proses' && $item->bukti_pembayaran !== null && $item->surveyor_id != null && $item->bukti_pembayaran2 !== null)
+												<tr class="table-primary">
+													<td>Status</td>
+													<td>Menunggu Konfirmasi Pelunasan</td>
 												</tr>
 
 												@endif
@@ -92,7 +97,16 @@
 														@endif
 													</td>
 												</tr>
-												
+												@if($item->bukti_pembayaran2 !=null)
+												<tr class="table-success">
+													<td>Bukti Pelunasan  </td>
+													<td>
+														<a href="
+													{{URL::asset('upload/bukti_pembayaran/'.$item->bukti_pembayaran2)}}
+													" download>{{$item->bukti_pembayaran2}}</a>
+													</td>
+												</tr>
+												@endif
 
 											</tbody>
 										</table>

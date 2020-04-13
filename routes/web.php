@@ -32,7 +32,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['cekuser','auth','activeuser'
 	Route::get('/detail-pesanan/{id}','UserController@detailPesanan')->name('detail-pesanan');
 	Route::get('/list-pesanan','UserController@listPesanan')->name('list-pesanan');
 	Route::post('/upload-pembayaran','UserController@uploadPembayaran')->name('add-bukti-pembayaran');
-	
+	Route::get('/detail-mitra/{id}','UserController@detailMitra')->name('detail-mitra');
+	Route::post('/upload-pembayaran-2','UserController@uploadPembayaran2')->name('add-bukti-pembayaran2');
 	
 
 });
@@ -66,6 +67,7 @@ Route::group(['prefix' => 'mitra', 'middleware' => ['cekmitra','auth','activeuse
 Route::group(['prefix' => 'operasional', 'middleware' => ['cekoperasional','auth'] ], function()
 {  
 	Route::get('/','OperasionalController@index')->name('operasional');
+	Route::get('/daftar-survey','OperasionalController@daftarsurvey')->name('daftar-survey');
 	Route::get('/detail-survey-operasional/{id}','OperasionalController@detailSurvey')->name('detail-survey-operasional');
 	Route::get('/daftar-mitra-aktif','OperasionalController@daftarMitra')->name('daftar-mitra-aktif');
 	Route::get('/pilih-surveyor/{id}','OperasionalController@pilihSurveyor')->name('pilih-surveyor');
@@ -75,5 +77,7 @@ Route::group(['prefix' => 'operasional', 'middleware' => ['cekoperasional','auth
 Route::post('/get-kabupaten/','HomeController@getCity')->name('get-kabupaten');
 Route::get('/get-otp','HomeController@getOtp')->name('get-otp')->middleware('auth');
 Route::get('/resend-email','HomeController@resendEmail')->name('resend-email')->middleware('auth');
+Route::get('/send-wa/{no_hp}','HomeController@sendWA')->name('send-wa')->middleware('auth');
 Route::post('/verifikasi-otp','HomeController@verifikasiOtp')->name('verifikasi-otp')->middleware('auth');
+Route::get('/cara-pembayaran','HomeController@caraPembayaran')->name('cara-pembayaran')->middleware('auth');
 

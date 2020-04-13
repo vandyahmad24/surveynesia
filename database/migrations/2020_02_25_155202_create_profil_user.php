@@ -13,7 +13,7 @@ class CreateProfilUser extends Migration
      */
     public function up()
     {
-        Schema::create('Profil_user', function (Blueprint $table) {
+        Schema::create('profil_user', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama',100);
             $table->string('alamat',255);
@@ -33,6 +33,6 @@ class CreateProfilUser extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Profil_user');
+        Schema::dropIfExists('profil_user');
     }
 }

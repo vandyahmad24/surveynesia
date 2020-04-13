@@ -51,6 +51,10 @@
 													<td>{{$user->jumlah_anggota}}</td>
 												</tr>
 												<tr>
+													<td>No Hp : </td>
+													<td> <a href="{{route('send-wa',$user->no_hp)}}" target="_blank"> {{$user->no_hp}}</a></td>
+												</tr>
+												<tr>
 													<td colspan="2">
 														<a href="/operasional/put-surveyor/{{$survey->id}}/{{$user->user_id}}" onclick="return confirm('Pilih {{$user->name}} Sebagai Surveyor?')" class="btn btn-info text-center">Piliih {{$user->name}}</a>
 													</td>

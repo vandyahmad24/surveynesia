@@ -98,6 +98,31 @@
 												</td>
 											</tr>
 											@endif
+											@if($survey->bukti_pembayaran2 !=null)
+											<tr>
+												<td>
+													<h3>Bukti Pelunasan</h3>
+												</td>
+												<td> 
+													<a href="
+													{{URL::asset('upload/bukti_pembayaran/'.$survey->bukti_pembayaran2)}}
+													" download>{{$survey->bukti_pembayaran2}}</a>
+												</td>
+											</tr>
+											@endif
+											@if($survey->surveyor_id !=null)
+											<tr>
+												<td>
+													<h3>Nama Surveyor</h3>
+												</td>
+												<td> 
+													{{$surveyor->name}} <br>
+												<a href="{{route('send-wa',$surveyor->no_hp)}}" target="_blank">{{$surveyor->no_hp}}</a>	
+												<br>
+												<a href="{{route('detail-mitra',$surveyor->user_id)}}" target="_blank">Lihat Profil Surveyor</a>
+												</td>
+											</tr>
+											@endif
 											<tr>
 												<td>
 													<h3>Status</h3>
@@ -126,17 +151,25 @@
 								<div class="card-body">
 									<ol class="activity-feed">
 										@foreach($activity as $aktif)
-										@if($aktif->tipe_aktivity=='upload_pembayaran_awal')
-										<li class="feed-item feed-item-success">
-										@else
-										<li class="feed-item feed-item-primary">
-										@endif
-											<time class="date" >{{ \Carbon\Carbon::parse($aktif->created_at)->format('d-M-Y')}}</time>
-											<span class="text">{{$aktif->deskripsi}}</a></span> 
-										</li>
-										@endforeach
+											@if($aktif->tipe_aktivity=='upload_pembayaran_awal')
+											<li class="feed-item feed-item-success">
+											@elseif($aktif->tipe_aktivity=='laporan_harian')
+											<li class="feed-item feed-item-warning">
+											@else
+											<li class="feed-item feed-item-primary">
+											@endif
+												<time class="date" >{{ \Carbon\Carbon::parse($aktif->created_at)->format('d-M-Y')}}</time>
+												<span class="text">{{$aktif->deskripsi}}</a></span> 
+											</li>
+											@endforeach
 										
 									</ol>
+									@if($survey->bukti_pembayaran2 ==null && $survey->survey_id !=null)
+									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#selesaisurvey">
+  Selesai Survey
+</button>
+@endif
+
 								</div>
 							</div>
 						</div>
@@ -144,6 +177,42 @@
 					</div>
 				</div>
 			</div>
-			
+			<div class="modal fade" id="selesaisurvey" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLabel">Selesai Survey</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        <h4>Selesaikan Survey Anda</h4> <br>
+			        <h5>Apakah anda yakin untuk menyelesaikan survey anda? <br> Upload Bukti Pelunasan terlebih dahulu lalu admin Surveynesia akan mengirimkan file hasil survey anda melalui email / langsung  </h5>
+
+			        	 <a href="{{route('cara-pembayaran')}}" target="_blank">Cara Pembayaran</a>
+			        	 <br>
+			        	 <br>
+			        <form action="{{route('add-bukti-pembayaran2')}}" method="post" enctype="multipart/form-data">
+			        	@csrf
+			        <input type="file" name="bukti_pembayaran2" class="form-control">
+			        <small>Upload bukti pembayaran sebesar <span class="text-danger">Rp. {{ number_format($pembayaran_awal, 2) }}</span>
+			        </small>
+			        @error('bukti_pembayaran2')
+					  <small class="form-text text-muted text-danger" role-alert>{{ $message }}</small>
+                      @enderror
+			        <input type="hidden" name="survey_id" value="{{$survey->id}}">
+
+			        
+			      
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+			        <button type="submit" class="btn btn-primary">Kirim</button>
+			      </div>
+			      </form>
+			    </div>
+			  </div>
+			</div>
 			
 		@endsection
