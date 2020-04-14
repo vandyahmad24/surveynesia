@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Webpixels">
+    <meta name="description" content="No 1 Platform Survey di Indonesia">
+    <meta name="author" content="Surveynesia">
     <title>@yield('title')</title>
     <!-- Preloader -->
     <style>
@@ -75,11 +75,10 @@
                 <div class="modal-body">
                     <!-- Text -->
                     <p class="text-sm text-white mb-3">
-                       Please Wait
+                     Mohon Tunggu
                     </p>
                     <!-- Buttons -->
-                    <a href="#" class="btn btn-sm btn-white" target="_blank">Learn more</a>
-                    <button type="button" class="btn btn-sm btn-primary mr-2" data-dismiss="modal">OK</button>
+                    
                 </div>
             </div>
         </div>

@@ -4,6 +4,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>@yield('title')</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+	 <meta name="description" content="No 1 Platform Survey di Indonesia">
+    <meta name="author" content="Surveynesia">
 	<link rel="icon" href="{{asset('logo_survey.png')}}" type="image/x-icon"/>
 
 	<!-- Fonts and icons -->
@@ -245,7 +247,7 @@
 		<footer class="footer">
 				<div class="container-fluid">
 					<div class="copyright ml-auto">
-						2020, Created <i class="fa fa-heart heart text-danger"></i> by <a href="#">Asdosku Guna Bangsa</a>
+						2020, Created <i class="fa fa-heart heart text-danger"></i> by <a href="#">Asdosku Bakti Nusantara</a>
 					</div>				
 				</div>
 			</footer>

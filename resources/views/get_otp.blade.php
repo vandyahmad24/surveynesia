@@ -113,7 +113,7 @@
      <div id="wrapper">
         <div id="dialog">
           <h3>Selamat Datang {{Auth::user()->name}}, Kami Baru saja mengirimkan <br> 4 - Kode Aktivasi melalui email anda: <span class="text-success"> {{Auth::user()->email}} </span></h3>
-          <p class="text-center"> Jika anda tidak menemukan email dari Surveynesia di kotak masuk mohon periksa di folder spam.</p>
+          <p class="text-center"> Mohon Tunggu 1-5 Menit <br> Jika anda tidak menemukan email dari Surveynesia di kotak masuk mohon periksa di folder spam.</p>
           <form id="form_send" method="post" action="{{route('verifikasi-otp')}}">
           <div>
             @csrf

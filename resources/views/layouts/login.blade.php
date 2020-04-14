@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Webpixels">
+    <meta name="description" content="No 1 Platform Survey di Indonesia">
+    <meta name="author" content="Surveynesia">
     <title>@yield('title')</title>
     <!-- Preloader -->
     <style>
