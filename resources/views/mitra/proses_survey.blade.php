@@ -26,7 +26,7 @@
 			
 				<div class="page-inner mt--5">
 					<div class="row mt--2">
-                       @foreach($survey as $item)
+                       @forelse ($survey as $item)
 						<div class="col-md-4">
 							<div class="card full-height">
 								<div class="card-body">
@@ -81,7 +81,15 @@
 								</div>
 							</div>
 						</div>
-						@endforeach
+						@empty
+						<div class="col-md-12">
+							<div class="card full-height">
+								<div class="card-body">
+									<h2>Anda Belum Mengerjakan Survey apapun</h2>
+								</div>
+							</div>
+						</div>
+						@endforelse
 						
 					</div>
 				</div>

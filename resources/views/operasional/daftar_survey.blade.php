@@ -57,21 +57,31 @@
 													<td>Status</td>
 													<td>Pending, Menunggu Pembayaran</td>
 												</tr>
-												@elseif($item->status='pending' && $item->bukti_pembayaran !== null && $item->surveyor_id == null && $item->bukti_pembayaran2 == null)
+
+												@elseif($item->status=='pending' && $item->bukti_pembayaran !== null && $item->surveyor_id == null && $item->bukti_pembayaran2 == null)
 												<tr class="table-info">
 													<td>Status</td>
 													<td>Pesanan Dalam Proses, Menunggu konfirmasi Pembayaran</td>
 												</tr>
-												@elseif($item->status='proses' && $item->bukti_pembayaran !== null && $item->surveyor_id != null && $item->bukti_pembayaran2 == null)
+
+												@elseif($item->status=='tolak' && $item->bukti_pembayaran != null && $item->surveyor_id == null && $item->bukti_pembayaran2 == null)
+												<tr class="table-danger">
+													<td>Status</td>
+													<td>Survey di Tolak</td>
+												</tr>
+												
+
+												@elseif($item->status=='proses' && $item->bukti_pembayaran !== null && $item->surveyor_id != null && $item->bukti_pembayaran2 == null)
 												<tr class="table-success">
 													<td>Status</td>
 													<td>Survey dalam Proses Pengerjaan</td>
 												</tr>
-												@elseif($item->status='proses' && $item->bukti_pembayaran !== null && $item->surveyor_id != null && $item->bukti_pembayaran2 !== null)
+												@elseif($item->status=='proses' && $item->bukti_pembayaran !== null && $item->surveyor_id != null && $item->bukti_pembayaran2 !== null)
 												<tr class="table-primary">
 													<td>Status</td>
 													<td>Menunggu Konfirmasi Pelunasan</td>
 												</tr>
+												
 
 												@endif
 												<tr>
@@ -103,7 +113,8 @@
 													<td>
 														<a href="
 													{{URL::asset('upload/bukti_pembayaran/'.$item->bukti_pembayaran2)}}
-													" download>{{$item->bukti_pembayaran2}}</a>
+													" download> Klik untuk download
+													</a>
 													</td>
 												</tr>
 												@endif

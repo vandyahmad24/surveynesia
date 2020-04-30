@@ -18,15 +18,16 @@ class MitraController extends Controller
     public function index()
     {
     	$auth = Auth::user();
-
+      // dd($auth->id);
 
     	$user =  DB::table('users as u')
 	            ->join('profil_mitra as pm', 'u.id', '=', 'pm.user_id')
 	            ->where('u.id','=',$auth->id)
 	            ->select('u.*', 'pm.*')
 	            ->first();
+              // dd($user);
 	     $provinsi = DB::table('indoregion_provinces')->get();
-
+       // dd($user);
     	if(Auth::user()->foto==null){
     		return view('mitra.edit_profil',compact('user','provinsi'));
     	}else{

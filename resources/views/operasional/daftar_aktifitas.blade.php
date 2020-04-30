@@ -28,6 +28,8 @@
 											<li class="feed-item feed-item-success">
 											@elseif($aktif->tipe_aktivity=='laporan_harian')
 											<li class="feed-item feed-item-warning">
+											@elseif($aktif->tipe_aktivity=='survey_ditolak')
+											<li class="feed-item feed-item-danger">
 											@else
 											<li class="feed-item feed-item-primary">
 											@endif

@@ -7,10 +7,11 @@ use Illuminate\Support\Facades\Schema;
 use Auth;
 use View;
 use App\Survey;
-class AppServiceProvider extends ServiceProvider
+
+class SurveynesiaServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * Register services.
      *
      * @return void
      */
@@ -20,15 +21,13 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * Bootstrap any application services.
+     * Bootstrap services.
      *
      * @return void
      */
     public function boot()
     {
-        Schema::defaultStringLength(191);
-        \Illuminate\Support\Facades\URL::forceScheme('https');
-        view()->composer('layouts.backend', function($view)
+         view()->composer('layouts.backend', function($view)
         {
             $survey = Survey::where('user_id',Auth::user()->id)->count();
             $proses_survey = Survey::where([['surveyor_id',Auth::user()->id],['status','proses']])->count();
@@ -40,7 +39,5 @@ class AppServiceProvider extends ServiceProvider
             $proses_survey = Survey::where([['surveyor_id',Auth::user()->id],['status','proses']])->count();
             $view->with('proses_survey', $proses_survey);
         });
-        
-
     }
 }

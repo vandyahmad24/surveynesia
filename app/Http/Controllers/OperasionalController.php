@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Auth;
 use App\Mail\EmailAdmin;
 use Illuminate\Support\Facades\Mail;
+use Redirect;
 
 class OperasionalController extends Controller
 {
@@ -28,8 +29,9 @@ class OperasionalController extends Controller
     {
     	
        $survey = Survey::find($id);
+       $user = User::find($survey->user_id);
        $activity = DB::table('activity')->where('survey_id',$id)->get();
-       return view('operasional.detail_survey',compact('survey','activity'));
+       return view('operasional.detail_survey',compact('survey','activity','user'));
     }
     public function daftarMitra()
     {
@@ -96,6 +98,23 @@ class OperasionalController extends Controller
           ->send(new EmailAdmin($content));
 
 
-        return redirect('/operasional')->with('success','Berhasil Melakukan Penugassan');
+        return redirect('/operasional/daftar-survey')->with('success','Berhasil Melakukan Penugassan');
+    }
+    public function tolakSurvey(Request $request)
+    {
+      // dd($request->all());
+      $survey = Survey::find($request->id_survey);
+      $survey->status = 'tolak';
+      $survey->save();
+
+    DB::table('activity')->insert([
+          'user_id' => $survey->user_id,
+          'survey_id'=> $request->id_survey,
+          'deskripsi' => 'survey '.$survey->nama.' ditolak karena '.$request->alasan,
+          'tipe_aktivity' => 'survey_ditolak',
+          'created_by' => Auth::user()->id,
+          'created_at' => Carbon::now()
+      ]);
+      return Redirect::back()->with('danger', 'Survey Berhasil di Batalkan');
     }
 }

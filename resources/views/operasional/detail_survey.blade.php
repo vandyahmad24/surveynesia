@@ -14,10 +14,16 @@
 					</div>
 				</div>
 					 @if (session('status'))
-                    <div class="alert alert-success">
-                        {{ session('status') }}
-                    </div>
-                @endif
+	                    <div class="alert alert-success">
+	                        {{ session('status') }}
+	                    </div>
+                	@endif
+
+                	@if (session('danger'))
+	                    <div class="alert alert-danger">
+	                        {{ session('status') }}
+	                    </div>
+                	@endif
 			
 				<div class="page-inner mt--5">
 					<div class="row mt--2">
@@ -26,6 +32,7 @@
 								<div class="card-body">
 									<div class="card-title">Nama Survey : {{$survey->nama}}</div>
 									<div class="card-category">Jenis Survey : {{$survey->Jenis->nama_survey}}</div>
+									<div class="card-category">Nama Pemesan : {{$user->name}}</div>
 									<hr>
 									<div class="card-body col-md-12">
 									<table class="table table-typo">
@@ -134,6 +141,8 @@
 													<span class="badge badge-warning">Menunggu Pembayaran</span>
 													@elseif($survey->status=='pending' && $survey->bukti_pembayaran !=null)
 													<span class="badge badge-info">Menunggu Konfirmasi Pembayaran</span>
+													@elseif($survey->status=='tolak' && $survey->bukti_pembayaran != null)
+													<span class="badge badge-danger"> Survey di Tolak</span>
 													@else
 													<span class="badge badge-success"> Pembayaran di Terima</span>
 													@endif
@@ -141,7 +150,15 @@
 											</tr>
 											<tr>
 												@if($survey->status=='pending' && $survey->bukti_pembayaran!=null)
-												<td colspan="2" class="text-center"><a href="{{route('pilih-surveyor',$survey->id)}}" onclick="return confirm('Pastikan Pembayaran sudah diterima?')" class="btn btn-primary">Konfirmasi Pembayaran</a></td>
+												<td colspan="2" class="text-center">
+													<div class="d-flex"></div>
+													<a href="{{route('pilih-surveyor',$survey->id)}}" onclick="return confirm('Pastikan Pembayaran sudah diterima?')" class="btn btn-primary">Konfirmasi Pembayaran</a>
+													<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#tolaksurvey">
+														Tolak Survey
+													</button>
+
+												</td>
+
 												@endif
 											</tr>
 											
@@ -154,6 +171,8 @@
 											<li class="feed-item feed-item-success">
 											@elseif($aktif->tipe_aktivity=='laporan_harian')
 											<li class="feed-item feed-item-warning">
+											@elseif($aktif->tipe_aktivity=='survey_ditolak')
+											<li class="feed-item feed-item-danger">
 											@else
 											<li class="feed-item feed-item-primary">
 											@endif
@@ -167,6 +186,27 @@
 											<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
 											 Konfirmasi Pelunasan
 											</button>
+
+
+			<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLongTitle">Konfirmasi Pelunasan</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        <h5>Sebelum melakukan konfirmasi pembayaran, Pastikan dana sudah masuk ke rekening sesuai dengan nominal <span class="text-success">Rp. {{ number_format($pembayaran_awal, 2) }} </span> , setelah melakukan konfirmasi, pastikan surveyor <b>{{$survey->Surveyor->name}} untuk mengirimkan hasil surveynya</b></h5>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+			        <a href="#" class="btn btn-primary">Konfirmasi Pembayaran</a>
+			      </div>
+			    </div>
+			  </div>
+			</div>
 											@endif
 
 										
@@ -179,25 +219,37 @@
 				</div>
 			</div>
 				<!-- Modal -->
-			<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+				<div class="modal fade" id="tolaksurvey" tabindex="-1" role="dialog" aria-labelledby="tolaksurveyTitle" aria-hidden="true">
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
 			      <div class="modal-header">
-			        <h5 class="modal-title" id="exampleModalLongTitle">Konfirmasi Pelunasan</h5>
+			        <h5 class="modal-title" id="tolaksurveyTitle">Tolak Survey</h5>
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			          <span aria-hidden="true">&times;</span>
 			        </button>
 			      </div>
 			      <div class="modal-body">
-			        <h5>Sebelum melakukan konfirmasi pembayara, Pastikan dana sudah masuk ke rekening sesuai dengan nominal <span class="text-success">Rp. {{ number_format($pembayaran_awal, 2) }} </span> , setelah melakukan konfirmasi, pastikan surveyor <b>{{$survey->Surveyor->name}} untuk mengirimkan hasil surveynya</b></h5>
+			       <form action="{{route('tolak-survey')}}" autocomplete="off" method="POST">
+			         	@csrf
+		         	   
+			         	 <div class="form-group">
+	         	 	     Anda Yakin Akan Menolak Permintaan Survey <span class="text-success"><b>{{$survey->nama}}</b></span>
+	         	 	     <br>
+							<label for="name">Alasan Penolakan</label>
+							 <textarea class="form-control" rows="3" name="alasan"></textarea>
+						</div>
+						<input type="hidden" name="id_survey" value="{{$survey->id}}">
+			         
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-			        <a href="#" class="btn btn-primary">Konfirmasi Pembayaran</a>
+			        <button type="submit" class="btn btn-danger">Buat Penolakan</button>
 			      </div>
+			      </form>
 			    </div>
 			  </div>
 			</div>
+
 		</div>
 			
 		@endsection

@@ -22,7 +22,7 @@
 								<div class="card-header">
 									<div class="card-title">Daftar User</div>
 									<div class="table-responsive">
-									<table class="table table-bordered table-head-bg-info table-bordered-bd-info mt-4">
+									<table class="table table-bordered table-head-bg-info table-bordered-bd-info mt-4" id="tableuser">
 										<thead>
 											<tr>
 												<th scope="col">No</th>
@@ -50,7 +50,7 @@
 										</tbody>
 									</table>
 									</div>
-									{{ $users->links() }}
+								
 								</div>
 								
 								
@@ -60,5 +60,11 @@
 					</div>
 				</div>
 			</div>
+
+			<script type="text/javascript">
+				$(document).ready( function () {
+				    $('#tableuser').DataTable();
+				} );
+			</script>
 		
 		@endsection

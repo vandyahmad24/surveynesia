@@ -15,7 +15,7 @@
 				</div>
 				<div class="page-inner mt--5">
 					<div class="row mt--2">
-                       @foreach($users as $user)
+                       @forelse ($users as $user)
 						<div class="col-md-4">
 							<div class="card full-height">
 								<div class="card-body">
@@ -70,7 +70,15 @@
 								</div>
 							</div>
 						</div>
-						@endforeach
+						@empty
+						<div class="col-md-12">
+							<div class="card full-height">
+								<div class="card-body">
+									Maaf belum ada Surveyor tersedia
+								</div>
+							</div>
+						</div>
+						@endforelse
 						
 					</div>
 				</div>

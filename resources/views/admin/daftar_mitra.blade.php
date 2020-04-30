@@ -25,7 +25,7 @@
 									<button type="button" class="btn btn-secondary mt-2 edit-survey" data-toggle="modal" data-target="#tambahmitra">
 									  Tambah Mitra
 									</button>
-									<table class="table table-bordered table-head-bg-info table-bordered-bd-info mt-4">
+									<table class="table table-bordered table-head-bg-info table-bordered-bd-info mt-4" id="tablemitra">
 										<thead>
 											<tr>
 												<th scope="col">No</th>
@@ -53,7 +53,6 @@
 										</tbody>
 									</table>
 									</div>
-									{{ $mitra->links() }}
 								</div>
 								
 								
@@ -176,6 +175,8 @@
 	                       
 	                   });
 	                });
+	                 $('#tablemitra').DataTable();
+	
 				});
 
 

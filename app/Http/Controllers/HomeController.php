@@ -28,10 +28,11 @@ class HomeController extends Controller
     public function resendEmail()
     {
     	$auth = Auth::user();
-    	
+    
     	$user = User::find($auth->id);
     	$user->otp = rand(1000,9999);
     	$user->save();
+        // dd($user);
 
     	Mail::to($auth->email)
           ->send(new SendEmail($user));

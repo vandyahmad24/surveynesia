@@ -35,7 +35,7 @@
 									  Tambah Konfigurasi
 									</button>
 									<div class="table-responsive">
-									<table class="table table-bordered table-head-bg-info table-bordered-bd-info mt-4">
+									<table class="table table-bordered table-head-bg-info table-bordered-bd-info mt-4" id="tableKonfigurasi">
 										<thead>
 											<tr>
 												<th scope="col">No</th>
@@ -175,6 +175,9 @@
 	            
 	        });
 		});
+
+		    $('#tableKonfigurasi').DataTable();
+	
 
 	});
 	</script>

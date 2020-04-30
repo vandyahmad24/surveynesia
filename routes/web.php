@@ -72,6 +72,7 @@ Route::group(['prefix' => 'operasional', 'middleware' => ['cekoperasional','auth
 	Route::get('/daftar-mitra-aktif','OperasionalController@daftarMitra')->name('daftar-mitra-aktif');
 	Route::get('/pilih-surveyor/{id}','OperasionalController@pilihSurveyor')->name('pilih-surveyor');
 	Route::get('/put-surveyor/{id_survey}/{id_mitra}','OperasionalController@putSurveyor')->name('put-surveyor');
+	Route::post('/tolak-survey/','OperasionalController@tolakSurvey')->name('tolak-survey');
 });
 
 Route::post('/get-kabupaten/','HomeController@getCity')->name('get-kabupaten');

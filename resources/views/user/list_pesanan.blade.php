@@ -26,7 +26,7 @@
 			
 				<div class="page-inner mt--5">
 					<div class="row mt--2">
-                       @foreach($survey as $item)
+                       @forelse ($survey as $item)
 						<div class="col-md-4">
 							<div class="card full-height">
 								<div class="card-body">
@@ -47,21 +47,36 @@
 													<td>Jenis Survey</td>
 													<td>{{$item->Jenis->nama_survey}}</td>
 												</tr>
-												@if($item->status=='pending' && $item->bukti_pembayaran ==null && $item->surveyor_id == null)
+												@if($item->status=='pending' && $item->bukti_pembayaran ==null && $item->surveyor_id == null && $item->bukti_pembayaran2 == null)
 												<tr class="table-warning">
 													<td>Status</td>
 													<td>Pending, Menunggu Pembayaran</td>
 												</tr>
-												@elseif($item->status='pending' && $item->bukti_pembayaran !== null && $item->surveyor_id == null)
+
+												@elseif($item->status=='pending' && $item->bukti_pembayaran !== null && $item->surveyor_id == null && $item->bukti_pembayaran2 == null)
 												<tr class="table-info">
 													<td>Status</td>
 													<td>Pesanan Dalam Proses, Menunggu konfirmasi Pembayaran</td>
 												</tr>
-												@elseif($item->status='proses' && $item->bukti_pembayaran !== null && $item->surveyor_id != null)
+
+												@elseif($item->status=='tolak' && $item->bukti_pembayaran != null && $item->surveyor_id == null && $item->bukti_pembayaran2 == null)
+												<tr class="table-danger">
+													<td>Status</td>
+													<td>Survey di Tolak</td>
+												</tr>
+												
+
+												@elseif($item->status=='proses' && $item->bukti_pembayaran !== null && $item->surveyor_id != null && $item->bukti_pembayaran2 == null)
 												<tr class="table-success">
 													<td>Status</td>
 													<td>Survey dalam Proses Pengerjaan</td>
 												</tr>
+												@elseif($item->status=='proses' && $item->bukti_pembayaran !== null && $item->surveyor_id != null && $item->bukti_pembayaran2 !== null)
+												<tr class="table-primary">
+													<td>Status</td>
+													<td>Menunggu Konfirmasi Pelunasan</td>
+												</tr>
+												
 
 												@endif
 												<tr>
@@ -97,7 +112,7 @@
 									<div class="btn mx-auto btn-warning btn-block btn-xs">
 										<a href="{{route('delete-pesanan',$item->id)}}" onclick="return confirm('Anda Yakin Menghapus Pesanan?')" class="btn btn-warning">Batalkan Pesanan</a>
 									</div>
-									@elseif($item->status=='pending' && $item->bukti_pembayaran !=null)
+									@else
 									<div class="btn mx-auto btn-success btn-block btn-xs">
 										<a href="{{route('detail-pesanan',$item->id)}}" class="btn btn-success">Lihat Status Pesanan</a>
 									</div>
@@ -106,7 +121,18 @@
 								</div>
 							</div>
 						</div>
-						@endforeach
+						@empty	
+						<div class="col-md-12">
+							<div class="card full-height">
+								<div class="card-body">
+									<h2>Anda Belum membuat survey</h2>
+								</div>
+							</div>
+						</div>
+
+
+
+						@endforelse
 						
 					</div>
 				</div>

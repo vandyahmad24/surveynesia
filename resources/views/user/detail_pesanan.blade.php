@@ -132,6 +132,8 @@
 													<span class="badge badge-warning">Menunggu Pembayaran</span>
 													@elseif($survey->status=='pending' && $survey->bukti_pembayaran !=null)
 													<span class="badge badge-info">Menunggu Konfirmasi Pembayaran</span>
+													@elseif($survey->status=='tolak' && $survey->bukti_pembayaran != null)
+													<span class="badge badge-danger"> Survey di Tolak</span>
 													@else
 													<span class="badge badge-success"> Pembayaran di Terima</span>
 													@endif
@@ -155,6 +157,8 @@
 											<li class="feed-item feed-item-success">
 											@elseif($aktif->tipe_aktivity=='laporan_harian')
 											<li class="feed-item feed-item-warning">
+											@elseif($aktif->tipe_aktivity=='survey_ditolak')
+											<li class="feed-item feed-item-danger">
 											@else
 											<li class="feed-item feed-item-primary">
 											@endif
@@ -164,11 +168,11 @@
 											@endforeach
 										
 									</ol>
-									@if($survey->bukti_pembayaran2 ==null && $survey->survey_id !=null)
+									@if($survey->surveyor_id != null && $survey->bukti_pembayaran2 == null)
 									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#selesaisurvey">
-  Selesai Survey
-</button>
-@endif
+									  Selesai Survey
+									</button>
+									@endif
 
 								</div>
 							</div>

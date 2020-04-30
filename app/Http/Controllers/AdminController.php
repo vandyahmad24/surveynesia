@@ -83,7 +83,7 @@ class AdminController extends Controller
     }
     public function daftarUser()
     {
-    	$users = DB::table('users')->where('level','user')->orderBy('id','desc')->paginate(15);
+    	$users = DB::table('users')->where('level','user')->orderBy('id','desc')->get();
     	return view('admin.daftar_user',compact('users'));
     }
     public function showProfil($id)
@@ -98,7 +98,7 @@ class AdminController extends Controller
     }
     public function daftarMitra()
     {
-    	$mitra = DB::table('users')->where('level','mitra')->orderBy('id','desc')->paginate(15);
+    	$mitra = DB::table('users')->where('level','mitra')->orderBy('id','desc')->get();
     	$provinsi = DB::table('indoregion_provinces')->get();
     	return view('admin.daftar_mitra',compact('mitra','provinsi'));
     }
