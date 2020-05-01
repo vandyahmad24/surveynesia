@@ -31,7 +31,8 @@ class OperasionalController extends Controller
        $survey = Survey::find($id);
        $user = User::find($survey->user_id);
        $activity = DB::table('activity')->where('survey_id',$id)->get();
-       return view('operasional.detail_survey',compact('survey','activity','user'));
+       $profil_mitra = DB::table('profil_mitra')->where('user_id',$survey->surveyor_id)->first();
+       return view('operasional.detail_survey',compact('survey','activity','user','profil_mitra'));
     }
     public function detailPemesan($id)
     {
@@ -125,5 +126,24 @@ class OperasionalController extends Controller
           'created_at' => Carbon::now()
       ]);
       return Redirect::back()->with('danger', 'Survey Berhasil di Batalkan');
+    }
+    public function selesaiSurvey($id)
+    {
+       $survey = Survey::find($id);
+       $survey->status = 'finish';
+       $survey->save();
+
+       $mitra = DB::table('profil_mitra')->where('user_id',$survey->surveyor_id)->update([
+          'status' => 'available'
+       ]);
+       $activity = DB::table('activity')->insert([
+          'user_id' => $survey->surveyor_id,
+          'survey_id' => $survey->id,
+          'deskripsi' => 'survey '.$survey->nama.' telah selesai dikerjakan',
+          'tipe_aktivity' => 'selesai_survey',
+          'created_by' => Auth::user()->id,
+          'created_at' => Carbon::now()
+       ]);
+       return redirect('operasional/daftar-survey');
     }
 }

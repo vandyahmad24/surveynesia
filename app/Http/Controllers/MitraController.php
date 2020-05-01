@@ -101,5 +101,11 @@ class MitraController extends Controller
         ]);
          return Redirect::back()->with('success', 'Laporan Harian Berhasil di tambahkan');
     }
+    public function finishSurvey()
+    {
+      $survey_finish = Survey::where('surveyor_id',Auth::user()->id)->get();
+
+     return view('mitra.finish_survey',compact('survey_finish'));
+    }
   
 }

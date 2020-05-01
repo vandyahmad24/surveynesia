@@ -39,5 +39,10 @@ class SurveynesiaServiceProvider extends ServiceProvider
             $proses_survey = Survey::where([['surveyor_id',Auth::user()->id],['status','proses']])->count();
             $view->with('proses_survey', $proses_survey);
         });
+           view()->composer('layouts.backend', function($view)
+        {
+            $survey_selesai = Survey::where([['surveyor_id',Auth::user()->id],['status','finish']])->count();
+            $view->with('survey_selesai', $survey_selesai);
+        });
     }
 }

@@ -231,6 +231,13 @@
 								<p>Proses Survey <span class="badge badge-primary"> {{$proses_survey}}</span> </p>
 							</a>
 						</li>
+						<li class="nav-item">
+							<a href="{{route('finish-survey')}}">
+								<i class="fas fa-tasks"></i>
+								<p>Survey Selesai <span class="badge badge-primary"> {{$survey_selesai}}</span> </p>
+							</a>
+						</li>
+
 
 						@endif
 

@@ -182,7 +182,7 @@
 											@endforeach
 											
 											</ol>
-											@if($survey->bukti_pembayaran2 != null)
+											@if($survey->bukti_pembayaran2 != null && $survey->status=='proses')
 											<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
 											 Konfirmasi Pelunasan
 											</button>
@@ -198,16 +198,23 @@
 			        </button>
 			      </div>
 			      <div class="modal-body">
-			        <h5>Sebelum melakukan konfirmasi pembayaran, Pastikan dana sudah masuk ke rekening sesuai dengan nominal <span class="text-success">Rp. {{ number_format($pembayaran_awal, 2) }} </span> , setelah melakukan konfirmasi, pastikan surveyor <b>{{$survey->Surveyor->name}} untuk mengirimkan hasil surveynya</b></h5>
+			        <h5>Sebelum melakukan konfirmasi pembayaran, Pastikan dana sudah masuk ke rekening sesuai dengan nominal <span class="text-success">Rp. {{ number_format($pembayaran_awal, 2) }} </span> , setelah melakukan konfirmasi, pastikan surveyor <b>{{$survey->Surveyor->name}} untuk mengirimkan hasil surveynya</b>
+			        dan operasional untuk mengirimkan kompensasi kepada surveyor sebesar 
+			        @php 
+			        $kompensasi = $survey->harga*70/100;
+			        $surveyor_kompensasi = $survey->harga-$kompensasi;
+			        @endphp
+			        <b>Rp. {{ number_format($surveyor_kompensasi, 2)}}</b> ke nomer rekening <b>{{$profil_mitra->no_rek}}</b>
+			        </h5>
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-			        <a href="#" class="btn btn-primary">Konfirmasi Pembayaran</a>
+			        <a href="{{route('selesai-survey',$survey->id)}}" class="btn btn-primary">Konfirmasi Pembayaran</a>
 			      </div>
 			    </div>
 			  </div>
 			</div>
-											@endif
+				@endif
 
 										
 								</div>

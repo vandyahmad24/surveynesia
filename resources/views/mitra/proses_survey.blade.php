@@ -85,7 +85,7 @@
 						<div class="col-md-12">
 							<div class="card full-height">
 								<div class="card-body">
-									<h2>Anda Belum Mengerjakan Survey apapun</h2>
+									<h2>Belum Mendapatkan Tugas Survey</h2>
 								</div>
 							</div>
 						</div>

@@ -76,6 +76,11 @@
 													<td>Status</td>
 													<td>Menunggu Konfirmasi Pelunasan</td>
 												</tr>
+												@elseif($item->status=='finish' && $item->bukti_pembayaran != null && $item->surveyor_id != null && $item->bukti_pembayaran2 !=null)
+												<tr class="table-primary">
+													<td>Status</td>
+													<td>Survey Selesai di Kerjakan</td>
+												</tr>
 												
 
 												@endif
