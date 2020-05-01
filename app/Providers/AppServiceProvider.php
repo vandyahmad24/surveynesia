@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        // \Illuminate\Support\Facades\URL::forceScheme('https');
+        \Illuminate\Support\Facades\URL::forceScheme('https');
         view()->composer('layouts.backend', function($view)
         {
             $survey = Survey::where('user_id',Auth::user()->id)->count();

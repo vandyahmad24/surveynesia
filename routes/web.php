@@ -1,5 +1,5 @@
 <?php
-
+use Spatie\Sitemap\SitemapGenerator;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +17,8 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('index');
 Route::get('/home', 'HomeController@index')->name('home');
+
+
 
 Route::group(['prefix' => 'user', 'middleware' => ['cekuser','auth','activeuser'] ], function()
 {  
@@ -85,3 +87,9 @@ Route::get('/send-wa/{no_hp}','HomeController@sendWA')->name('send-wa')->middlew
 Route::post('/verifikasi-otp','HomeController@verifikasiOtp')->name('verifikasi-otp')->middleware('auth');
 Route::get('/cara-pembayaran','HomeController@caraPembayaran')->name('cara-pembayaran')->middleware('auth');
 
+
+Route::get('sitemap',function(){
+	SitemapGenerator::create('https://surveynesia.id')->writeToFile('sitemap.xml');
+	return 'stemap created';
+
+});
