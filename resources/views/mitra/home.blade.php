@@ -87,9 +87,9 @@
 											</tr>
 											<tr>
 												<td>
-													<h3>Saldo Saat ini : </h3>
+													<h3>No Rekening : </h3>
 												</td>
-												<td><span class="h5">Rp. {{ number_format($user->saldo, 2) }}</span>
+												<td><span class="h5">{{$user->no_rek}}</span>
 												</td>
 											</tr>
 											<tr>

@@ -14,7 +14,7 @@ class EnchanProfilUser extends Migration
     public function up()
     {
         Schema::table('profil_mitra', function (Blueprint $table) {
-            $table->integer('saldo')->default(0);
+            $table->string('no_rek')->default(0);
             $table->string('status')->default('available');
         });
     }
@@ -27,7 +27,7 @@ class EnchanProfilUser extends Migration
     public function down()
     {
          Schema::table('profil_mitra', function (Blueprint $table) {
-            $table->dropColumn('saldo');
+            $table->dropColumn('no_rek');
             $table->dropColumn('status');
         });
     }

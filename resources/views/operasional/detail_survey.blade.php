@@ -32,7 +32,7 @@
 								<div class="card-body">
 									<div class="card-title">Nama Survey : {{$survey->nama}}</div>
 									<div class="card-category">Jenis Survey : {{$survey->Jenis->nama_survey}}</div>
-									<div class="card-category">Nama Pemesan : {{$user->name}}</div>
+									<div class="card-category">Nama Pemesan : <a href="{{route('detail-pemesan',$user->id)}}" target="_blank"> {{$user->name}} </a></div>
 									<hr>
 									<div class="card-body col-md-12">
 									<table class="table table-typo">

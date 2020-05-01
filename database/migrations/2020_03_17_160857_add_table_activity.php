@@ -17,7 +17,7 @@ class AddTableActivity extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->integer('survey_id');
-            $table->string('deskripsi');
+            $table->text('deskripsi');
             $table->string('tipe_aktivity');
             $table->integer('created_by');
             $table->timestamps();

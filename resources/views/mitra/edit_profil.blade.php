@@ -75,6 +75,26 @@
                                           @enderror
 									</div>
 									<div class="form-group">
+										<label for="">No Rekening </label>
+										<div class="d-flex">
+										<div class="col-md-3">
+										<select class="form-control" name="nama_bank" id="nama_bank">
+											<option value="BNI">BNI</option>
+											<option value="BRI">BRI</option>
+											<option value="BCA">BCA</option>
+											<option value="MANDIRI">MANDIRI</option>
+											<option value="BTN">BTN</option>
+										</select>
+										</div>
+										<div class="col-md-6">
+										<input type="text" name="no_rek" class="form-control" value="{{$user->no_rek}}" >
+										</div>
+										 @error('instansi')
+										  <small class="form-text text-muted text-danger" role-alert>{{ $message }}</small>
+                                          @enderror
+                                          </div>
+									</div>
+									<div class="form-group">
 										<label for="">Provinsi</label>
 										<select class="form-control" name="provinsi" id="provinsi">
 											<option value="">Pilih Provinsi</option>

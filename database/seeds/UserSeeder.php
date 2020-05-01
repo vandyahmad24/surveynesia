@@ -23,14 +23,6 @@ class UserSeeder extends Seeder
         	'created_at' => Carbon::now()
         ]);
         DB::table('users')->insert([
-        	'name' => 'Mitra Surveynesia',
-        	'email' => 'mitra@gmail.com',
-        	'password' => Hash::make('12341234'),
-        	'level' => 'mitra',
-            'is_active' => 0,
-        	'created_at' => Carbon::now()
-        ]);
-        DB::table('users')->insert([
         	'name' => 'User 1 Surveynesia',
         	'email' => 'user@gmail.com',
         	'password' => Hash::make('12341234'),

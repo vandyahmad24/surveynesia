@@ -33,6 +33,15 @@ class OperasionalController extends Controller
        $activity = DB::table('activity')->where('survey_id',$id)->get();
        return view('operasional.detail_survey',compact('survey','activity','user'));
     }
+    public function detailPemesan($id)
+    {
+       $user = DB::table('users as u')
+                        ->leftJoin('profil_user as pu', 'u.id','=','pu.user_id')
+                        ->where('u.id',$id)
+                        ->first();
+      return view('operasional.detail_pemesan',compact('user'));
+          
+    }
     public function daftarMitra()
     {
     	   $users = DB::table('users as u')

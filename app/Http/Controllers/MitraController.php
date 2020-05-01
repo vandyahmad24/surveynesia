@@ -36,6 +36,7 @@ class MitraController extends Controller
     }
     public function putProfil(Request $request)
     {
+    
     	$this->validate($request,[
         'name' => 'required|string|max:255',
         'password' => 'required|string|min:8',
@@ -45,6 +46,7 @@ class MitraController extends Controller
         'alamat' => 'required|string',
         'provinsi' => 'required|string',
         'kota' => 'required|string',
+        'no_rek' => 'required|numeric'
       ]);
 
     	$file = $request->file('upload');
@@ -67,6 +69,7 @@ class MitraController extends Controller
        		'jumlah_anggota' => $request->jumlah_anggota,
        		'provinsi' => $request->provinsi,
        		'kabupaten' => $request->kota,
+          'no_rek' => $request->nama_bank."-".$request->no_rek,
        		'updated_at' => Carbon::now()
        ]);	
        return redirect('/mitra');
