@@ -1,6 +1,6 @@
 
-#RewriteEngine on
-#RewriteCond %{HTTP_HOST} ^surveynesia\.id$ [OR]
-#RewriteCond %{HTTP_HOST} ^www\.surveynesia\.id$
-#RewriteRule ^/?$ "http\:\/\/surveynesia\.id\/public" [R=301,L]
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^surveynesia\.id$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.surveynesia\.id$
+RewriteRule ^/?$ "https\:\/\/surveynesia\.id\/public" [R=301,L]
 
