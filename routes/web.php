@@ -1,5 +1,5 @@
 <?php
-
+use Spatie\Sitemap\SitemapGenerator;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +17,13 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('index');
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::get('sitemap',function(){
+	SitemapGenerator::create('https://surveynesia.id')->writeToFile('sitemap.xml');
+	return 'good';
+
+});
 
 Route::group(['prefix' => 'user', 'middleware' => ['cekuser','auth','activeuser'] ], function()
 {  

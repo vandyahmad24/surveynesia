@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="No 1 Platform Survey di Indonesia">
     <meta name="author" content="Surveynesia">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="2_yEKxNVC8CrhqVENd6pJq_m7NBbpuLqwxUJ361164A" />
     <title>@yield('title')</title>
     <!-- Preloader -->
     <style>
@@ -63,26 +65,7 @@
 </head>
 
 <body>
-    <!-- Preloader -->
-    <div class="preloader">
-        <div class="spinner-border text-primary" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-    </div>
-    <div class="modal fade" tabindex="-1" role="dialog" id="modal-cookies" data-backdrop="false" aria-labelledby="modal-cookies" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-aside left-4 right-4 bottom-4">
-            <div class="modal-content bg-dark-dark">
-                <div class="modal-body">
-                    <!-- Text -->
-                    <p class="text-sm text-white mb-3">
-                     Mohon Tunggu
-                    </p>
-                    <!-- Buttons -->
-                    
-                </div>
-            </div>
-        </div>
-    </div>
+ 
     <!-- Go Pro -->
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
