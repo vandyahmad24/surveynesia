@@ -28,7 +28,7 @@ class EmailAdmin extends Mailable
      */
     public function build()
     {
-        return $this->from('admin@surveynesia.id')
+        return $this->from('admin@surveynesia.com')
                    ->subject($this->content["subject"])
                    ->view('mail.admin_mail');
     }

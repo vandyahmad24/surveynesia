@@ -212,7 +212,7 @@
                 <div class="row align-items-center justify-content-md-between pb-4">
                     <div class="col-md-6">
                         <div class="copyright text-sm font-weight-bold text-center text-md-left">
-                            &copy; 2020 <a href="https://surveynesia.id" class="font-weight-bold" target="_blank">Surveynesia</a>. All rights reserved
+                            &copy; 2020 <a href="https://surveynesia.com" class="font-weight-bold" target="_blank">Surveynesia</a>. All rights reserved
                         </div>
                     </div>
                 

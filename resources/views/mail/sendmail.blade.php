@@ -333,7 +333,7 @@
     </style>
   </head>
   <body class="">
-    <span class="preheader">Aktifasi user {{$user['name']}} <a href="www.surveynesia.id">Surveynesia.id</a>  .</span>
+    <span class="preheader">Aktifasi user {{$user['name']}} <a href="www.surveynesia.com">surveynesia.com</a>  .</span>
     <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
       <tr>
         <td>&nbsp;</td>
@@ -367,7 +367,7 @@
                             </tr>
                           </tbody>
                         </table>
-                        <p>Masukkan kode aktifasi anda ke halaman surveynesia.id .</p>
+                        <p>Masukkan kode aktifasi anda ke halaman surveynesia.com .</p>
                         <p>Terimakasih atas partisipasinya <b>{{$user['name']}}</b></p>
                       </td>
                     </tr>
@@ -384,7 +384,7 @@
               <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                   <td class="content-block powered-by">
-                    Powered by <a href="#">Surveynesia.id</a>.
+                    Powered by <a href="#">surveynesia.com</a>.
                   </td>
                 </tr>
               </table>

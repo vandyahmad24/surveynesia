@@ -89,7 +89,7 @@ Route::get('/cara-pembayaran','HomeController@caraPembayaran')->name('cara-pemba
 
 
 Route::get('sitemap',function(){
-	SitemapGenerator::create('https://surveynesia.id')->writeToFile('sitemap.xml');
+	SitemapGenerator::create('https://surveynesia.com')->writeToFile('sitemap.xml');
 	return 'stemap created';
 
 });

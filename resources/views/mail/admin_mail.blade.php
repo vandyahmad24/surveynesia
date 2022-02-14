@@ -366,7 +366,7 @@
                             </tr>
                           </tbody>
                         </table>
-                        <p>Powered By Surveynesia.id .</p>
+                        <p>Powered By surveynesia.com .</p>
                        
                       </td>
                     </tr>
@@ -383,7 +383,7 @@
               <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                   <td class="content-block powered-by">
-                    Powered by <a href="#">Surveynesia.id</a>.
+                    Powered by <a href="#">surveynesia.com</a>.
                   </td>
                 </tr>
               </table>
