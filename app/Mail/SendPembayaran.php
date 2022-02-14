@@ -31,7 +31,7 @@ class SendPembayaran extends Mailable
     public function build()
     {
         // return $this->view('view.name');
-          return $this->from('admin@surveynesia.id')
+          return $this->from('admin@surveynesia.com')
                    ->subject('Konfirmasi Pembayaran')
                    ->view('mail.pembayaran');
                    
