@@ -24,3 +24,6 @@
   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
   
 </IfModule>
+RewriteCond %{HTTP_HOST} ^survey\.asdosku\.com$
+RewriteRule ^/?$ "https\:\/\/survey\.asdosku\.com\/" [R=301,L]
+
